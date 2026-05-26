@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
-  "totalCases": 9,
+  "totalCases": 10,
   "categories": [
     {
       "id": "ui",
@@ -170,7 +170,7 @@
         "故事",
         "世界观"
       ],
-      "count": 2
+      "count": 3
     },
     {
       "id": "other",
@@ -325,6 +325,19 @@
       "category": "poster",
       "tags": [],
       "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-9"
+    },
+    {
+      "id": 10,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case10.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！\n\n4个不同品类案例：\n青柚信号站、丸作研究社、云朵冰务局、慢慢邮局\n每张图都包含：摊位实景渲染+物料展开+尺寸配色+IP形象+使用场景\n\n这套视觉，让你的小摊成为集市最靓的摊！\n很适合文创集市、美食市集、校园活动、音乐节摊位、商场快闪参考！\n\n通用提示词放评论区👇",
+      "promptPreview": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！\n\n4个不同品类案例：\n青柚信号站、丸作研究社、云朵冰务局、慢慢邮局\n每张图都包含：摊位实景渲染+物料展开+尺寸配色+IP形象+使用场景\n\n这套视觉，让你的小摊成...",
+      "category": "scene",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-10"
     }
   ]
 }

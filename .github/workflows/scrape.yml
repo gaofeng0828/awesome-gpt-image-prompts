@@ -7,9 +7,19 @@ on:
         description: 'X/Twitter URL to scrape'
         required: true
         type: string
+      prompt:
+        description: 'Prompt text (user provided)'
+        required: true
+        type: string
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   scrape:
@@ -27,6 +37,7 @@ jobs:
       - name: Scrape tweet
         env:
           TWEET_URL: ${{ inputs.url }}
+          USER_PROMPT: ${{ inputs.prompt }}
         run: bash scripts/scrape-and-deploy.sh "$TWEET_URL"
 
       - name: Commit and push
@@ -40,3 +51,15 @@ jobs:
             git commit -m "scrape: ${{ inputs.url }}"
             git push
           fi
+
+      - name: Build site
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

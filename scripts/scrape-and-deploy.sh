@@ -1,6 +1,7 @@
 #!/bin/bash
 # Scrape a single tweet and add it to the gallery
 # Usage: ./scrape-and-deploy.sh <tweet-url>
+# Environment: USER_PROMPT (required) - user-provided prompt text
 
 set -e
 
@@ -8,6 +9,11 @@ TWEET_URL="$1"
 
 if [ -z "$TWEET_URL" ]; then
   echo "Error: No tweet URL provided"
+  exit 1
+fi
+
+if [ -z "$USER_PROMPT" ]; then
+  echo "Error: USER_PROMPT environment variable is required"
   exit 1
 fi
 
@@ -75,7 +81,7 @@ if [ -n "$PHOTO_URL" ]; then
   fi
 fi
 
-# Extract title (first line of tweet, cleaned)
+# Extract title from first line of tweet
 TITLE=$(echo "$TWEET_TEXT" | head -1 | sed 's/^[^a-zA-Z一-鿿]*//' | cut -c1-40)
 if [ -z "$TITLE" ]; then
   TITLE="案例 $NEXT_ID"
@@ -88,49 +94,53 @@ else
   SOURCE_LABEL="社区分享"
 fi
 
-# Create markdown entry
-MARKDOWN_ENTRY="
-<a name=\"case-$NEXT_ID\"></a>
+# Build image line
+if [ -n "$IMAGE_REF" ]; then
+  IMAGE_LINE="![$TITLE]($IMAGE_REF)"
+else
+  IMAGE_LINE="![$TITLE](../data/images/case${NEXT_ID}.jpg)"
+fi
+
+# Write markdown entry to a temp file (safe for multi-line / special chars)
+ENTRY_FILE=$(mktemp)
+cat > "$ENTRY_FILE" <<ENTRY_EOF
+
+<a name="case-$NEXT_ID"></a>
 
 ### 例 $NEXT_ID：$TITLE
 
-"
+$IMAGE_LINE
 
-if [ -n "$IMAGE_REF" ]; then
-  MARKDOWN_ENTRY="${MARKDOWN_ENTRY}![$TITLE]($IMAGE_REF)
-"
-else
-  MARKDOWN_ENTRY="${MARKDOWN_ENTRY}![$TITLE](../data/images/case${NEXT_ID}.jpg)
-"
-fi
-
-MARKDOWN_ENTRY="${MARKDOWN_ENTRY}
 **来源：** [$SOURCE_LABEL]($TWEET_URL_ACTUAL)
 
 **提示词：**
 
 \`\`\`text
-$TWEET_TEXT
+$USER_PROMPT
 \`\`\`
 
 ***
 
-"
+ENTRY_EOF
 
-# Insert into gallery.md before the marker
+# Insert into gallery.md before the marker, or append to end
 if grep -q "<!-- 在上方添加新案例" docs/gallery.md; then
-  # Use awk to insert before the marker
-  awk -v entry="$MARKDOWN_ENTRY" '
-    /<!-- 在上方添加新案例/ { print entry }
-    { print }
-  ' docs/gallery.md > docs/gallery.md.tmp
-  mv docs/gallery.md.tmp docs/gallery.md
-  echo "✅ Added to gallery.md"
+  # Use sed to insert before the marker line
+  MARKER_LINE=$(grep -n "<!-- 在上方添加新案例" docs/gallery.md | head -1 | cut -d: -f1)
+  if [ -n "$MARKER_LINE" ]; then
+    # Create temp output: lines before marker + entry + marker + lines after
+    head -n $((MARKER_LINE - 1)) docs/gallery.md > docs/gallery.md.tmp
+    cat "$ENTRY_FILE" >> docs/gallery.md.tmp
+    tail -n +${MARKER_LINE} docs/gallery.md >> docs/gallery.md.tmp
+    mv docs/gallery.md.tmp docs/gallery.md
+    echo "✅ Added to gallery.md (before marker)"
+  fi
 else
-  # Append to end
-  echo "$MARKDOWN_ENTRY" >> docs/gallery.md
+  cat "$ENTRY_FILE" >> docs/gallery.md
   echo "✅ Appended to gallery.md"
 fi
+
+rm -f "$ENTRY_FILE"
 
 # Regenerate site data
 echo "🔄 Regenerating site data..."
@@ -142,4 +152,5 @@ echo "Summary:"
 echo "  Title: $TITLE"
 echo "  Author: $SOURCE_LABEL"
 echo "  Image: ${IMAGE_REF:-none}"
+echo "  Prompt: ${USER_PROMPT:0:60}..."
 echo "  URL: $TWEET_URL_ACTUAL"
