@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
-  "totalCases": 13,
+  "totalCases": 14,
   "categories": [
     {
       "id": "ui",
@@ -53,7 +53,7 @@
         "字体",
         "宣传"
       ],
-      "count": 4
+      "count": 5
     },
     {
       "id": "product",
@@ -390,6 +390,22 @@
         "商务"
       ],
       "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-13"
+    },
+    {
+      "id": 14,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case14.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "速度测试：设计一个复古唱片店的品牌视觉，包括店面外观、唱片封面展示架、收银台区域。风格：80年代复古，霓虹灯，木质唱片架。",
+      "promptPreview": "速度测试：设计一个复古唱片店的品牌视觉，包括店面外观、唱片封面展示架、收银台区域。风格：80年代复古，霓虹灯，木质唱片架。",
+      "category": "poster",
+      "tags": [
+        "复古",
+        "商务"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-14"
     }
   ]
 }
