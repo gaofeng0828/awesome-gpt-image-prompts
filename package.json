@@ -11,7 +11,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "add": "node scripts/add-case.mjs",
-    "scrape": "node scripts/scrape-x.mjs"
+    "scrape": "node scripts/scrape-x.mjs",
+    "publish": "node scripts/publish.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.469.0",
