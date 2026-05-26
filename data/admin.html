@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>管理后台 — GPT-Image2 画廊</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #F7F7F5;
+    --bg-card: #FFFFFF;
+    --text: #1A1A1A;
+    --text-2: #666;
+    --text-3: #999;
+    --border: #E0DED9;
+    --accent: #1A1A1A;
+    --accent-inv: #FFFFFF;
+    --success: #16A34A;
+    --error: #DC2626;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Noto Sans SC', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .header p {
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 6px;
+  }
+
+  .field input {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .field input:focus {
+    border-color: var(--accent);
+  }
+
+  .field input::placeholder {
+    color: var(--text-3);
+  }
+
+  .field .hint {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  .field .hint a {
+    color: var(--text-2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: var(--accent-inv);
+    border: none;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn:hover { opacity: 0.85; }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn.loading {
+    background: var(--text-2);
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .status {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    display: none;
+  }
+
+  .status.show { display: block; }
+
+  .status.success {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    color: var(--success);
+  }
+
+  .status.error {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: var(--error);
+  }
+
+  .status.info {
+    background: #F0F9FF;
+    border: 1px solid #BAE6FD;
+    color: #0369A1;
+  }
+
+  .status a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-3);
+  }
+
+  .footer a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  .toggle-token {
+    font-size: 11px;
+    color: var(--text-3);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .toggle-token:hover {
+    color: var(--text);
+  }
+
+  .token-field {
+    display: none;
+  }
+
+  .token-field.show {
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h1>Prompt Scraper</h1>
+      <p>粘贴 X/Twitter 链接，自动采集并发布到画廊</p>
+    </div>
+
+    <form id="scrapeForm">
+      <div class="field">
+        <label for="url">推文链接</label>
+        <input
+          type="url"
+          id="url"
+          name="url"
+          placeholder="https://x.com/username/status/123456"
+          required
+        />
+      </div>
+
+      <div class="toggle-token" onclick="toggleToken()">
+        <span id="toggleIcon">▶</span> GitHub Token 设置
+      </div>
+
+      <div class="field token-field" id="tokenField">
+        <label for="token">Personal Access Token</label>
+        <input
+          type="password"
+          id="token"
+          name="token"
+          placeholder="ghp_xxxxxxxxxxxx"
+        />
+        <div class="hint">
+          需要 <code>repo</code> 和 <code>workflow</code> 权限。
+          <a href="https://github.com/settings/tokens/new?scopes=repo,workflow&description=GPT-Image2%20Scraper" target="_blank">创建 Token →</a>
+          <br/>Token 保存在本地浏览器，不会上传。
+        </div>
+      </div>
+
+      <button type="submit" class="btn" id="submitBtn">
+        <span id="btnText">发布到画廊</span>
+      </button>
+    </form>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <div class="footer">
+    <a href="./">← 返回画廊</a>
+  </div>
+</div>
+
+<script>
+const GITHUB_USER = 'gaofeng0828';
+const GITHUB_REPO = 'awesome-gpt-image-prompts';
+const WORKFLOW_ID = 'scrape.yml';
+
+// Load saved token
+const savedToken = localStorage.getItem('github_token');
+if (savedToken) {
+  document.getElementById('token').value = savedToken;
+  document.getElementById('tokenField').classList.add('show');
+  document.getElementById('toggleIcon').textContent = '▼';
+}
+
+function toggleToken() {
+  const field = document.getElementById('tokenField');
+  const icon = document.getElementById('toggleIcon');
+  field.classList.toggle('show');
+  icon.textContent = field.classList.contains('show') ? '▼' : '▶';
+}
+
+function showStatus(message, type) {
+  const el = document.getElementById('status');
+  el.innerHTML = message;
+  el.className = `status show ${type}`;
+}
+
+function setLoading(loading) {
+  const btn = document.getElementById('submitBtn');
+  const text = document.getElementById('btnText');
+  if (loading) {
+    btn.disabled = true;
+    btn.classList.add('loading');
+    text.innerHTML = '<span class="spinner"></span> 正在触发工作流...';
+  } else {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    text.textContent = '发布到画廊';
+  }
+}
+
+document.getElementById('scrapeForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const url = document.getElementById('url').value.trim();
+  const token = document.getElementById('token').value.trim();
+
+  if (!url) {
+    showStatus('请输入推文链接', 'error');
+    return;
+  }
+
+  if (!token) {
+    showStatus('请展开「GitHub Token 设置」并填入 Token', 'error');
+    document.getElementById('tokenField').classList.add('show');
+    document.getElementById('toggleIcon').textContent = '▼';
+    return;
+  }
+
+  // Save token
+  localStorage.setItem('github_token', token);
+
+  setLoading(true);
+  showStatus('正在触发 GitHub Actions 工作流...', 'info');
+
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/actions/workflows/${WORKFLOW_ID}/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ref: 'main',
+          inputs: { url }
+        })
+      }
+    );
+
+    if (response.status === 204) {
+      const runsUrl = `https://github.com/${GITHUB_USER}/${GITHUB_REPO}/actions/workflows/${WORKFLOW_ID}`;
+      showStatus(
+        `✅ 工作流已触发！<br><br>` +
+        `<a href="${runsUrl}" target="_blank">查看运行状态 →</a><br><br>` +
+        `采集 + 部署大约需要 2-3 分钟。完成后刷新画廊页面即可看到新案例。`,
+        'success'
+      );
+      document.getElementById('url').value = '';
+    } else if (response.status === 401) {
+      showStatus('❌ Token 无效或已过期，请检查 Token 是否正确', 'error');
+    } else if (response.status === 403) {
+      showStatus('❌ Token 权限不足，需要 <code>repo</code> 和 <code>workflow</code> 权限', 'error');
+    } else if (response.status === 404) {
+      showStatus('❌ 找不到仓库或工作流，请确认仓库地址和工作流文件', 'error');
+    } else {
+      const data = await response.json();
+      showStatus(`❌ 请求失败 (${response.status}): ${data.message || '未知错误'}`, 'error');
+    }
+  } catch (err) {
+    showStatus(`❌ 网络错误: ${err.message}`, 'error');
+  } finally {
+    setLoading(false);
+  }
+});
+</script>
+</body>
+</html>

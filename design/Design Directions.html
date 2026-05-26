@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GPT-Image2 Gallery — Design Directions</title>
+<style>
+  /* ── System ──
+     Base: #FAFAF8 warm off-white
+     Text: #1a1a1a near-black
+     Accent palette varies per direction
+     Type: DM Serif Display (headings), DM Sans (body), JetBrains Mono (code)
+     Layout: 3-column comparison grid, then full-width previews
+  */
+
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --bg: #FAFAF8;
+    --text: #1a1a1a;
+    --text-2: #555;
+    --text-3: #888;
+    --border: #e5e3df;
+    --card-bg: #fff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Page Header ── */
+  .page-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+  }
+
+  .page-header h1 {
+    font-family: 'DM Serif Display', 'Noto Serif SC', serif;
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .page-header p {
+    color: var(--text-2);
+    font-size: 16px;
+    max-width: 560px;
+  }
+
+  .page-header .instruction {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #f0eeea;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-2);
+    display: inline-block;
+  }
+
+  /* ── Direction Cards ── */
+  .directions {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .direction {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+
+  .direction:hover {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .dir-label {
+    padding: 24px 24px 0;
+  }
+
+  .dir-label .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .dir-label h2 {
+    font-family: 'DM Serif Display', 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+
+  .dir-label .sub {
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  .dir-meta {
+    padding: 16px 24px;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .dir-meta strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .dir-meta span {
+    display: inline-block;
+    background: #f5f3ef;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    margin: 1px 2px;
+  }
+
+  /* ── Preview Canvases ── */
+  .preview-canvas {
+    aspect-ratio: 3/4;
+    margin: 0 16px 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ═══════════════════════════════════════════
+     DIRECTION A — Editorial Magazine
+     Inspired by: Pentagram, Monocle, It's Nice That
+  ═══════════════════════════════════════════ */
+  .preview-a {
+    background: #FAFAF8;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .pa-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .pa-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .pa-nav {
+    display: flex;
+    gap: 16px;
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 0.04em;
+  }
+
+  .pa-hero {
+    padding: 20px 0 10px;
+  }
+
+  .pa-hero h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .pa-hero p {
+    font-size: 11px;
+    color: #888;
+    max-width: 200px;
+  }
+
+  .pa-search {
+    width: 100%;
+    height: 36px;
+    background: #f0eeea;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .pa-search .icon {
+    width: 14px; height: 14px;
+    border: 1.5px solid #aaa;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pa-search .icon::after {
+    content: '';
+    width: 5px; height: 1.5px;
+    background: #aaa;
+    position: absolute;
+    bottom: -2px; right: -3px;
+    transform: rotate(45deg);
+  }
+
+  .pa-search .placeholder {
+    font-size: 11px;
+    color: #bbb;
+  }
+
+  .pa-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .pa-chip {
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 1px solid #d5d3cf;
+    border-radius: 20px;
+    color: #666;
+  }
+
+  .pa-chip.active {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+  }
+
+  .pa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .pa-card {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pa-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #e8e4dd 0%, #d5cfc5 100%);
+    position: relative;
+  }
+
+  .pa-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(180,160,130,0.3) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(200,180,150,0.2) 0%, transparent 40%);
+  }
+
+  .pa-card-body {
+    padding: 8px 0;
+  }
+
+  .pa-card-body h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+
+  .pa-card-body .meta {
+    font-size: 9px;
+    color: #aaa;
+  }
+
+  .pa-card-big {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+  }
+
+  .pa-card-big .img-area {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #ddd8cf 0%, #c5bfb5 100%);
+    border-radius: 6px;
+    position: relative;
+  }
+
+  .pa-card-big .img-area::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(160,140,110,0.2) 0%, transparent 60%);
+  }
+
+  .pa-card-big .text-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .pa-card-big .text-area h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .pa-card-big .text-area p {
+    font-size: 9px;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  .pa-card-big .copy-btn {
+    display: inline-block;
+    font-size: 9px;
+    padding: 4px 12px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 4px;
+    width: fit-content;
+  }
+
+  /* ═══════════════════════════════════════════
+     DIRECTION B — Museum / Gallery
+     Inspired by: MoMA, Tate, Fondation Beyeler
+  ═══════════════════════════════════════════ */
+  .preview-b {
+    background: #fff;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pb-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pb-logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .pb-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #bbb;
+  }
+
+  .pb-hero {
+    padding: 16px 0;
+    text-align: center;
+  }
+
+  .pb-hero h2 {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .pb-hero .title {
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  .pb-search {
+    width: 200px;
+    margin: 0 auto;
+    height: 32px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px;
+  }
+
+  .pb-search .placeholder {
+    font-size: 11px;
+    color: #ccc;
+  }
+
+  .pb-filter-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .pb-filter-item {
+    font-size: 11px;
+    color: #bbb;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .pb-filter-item.active {
+    color: #1a1a1a;
+  }
+
+  .pb-filter-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 1.5px;
+    background: #1a1a1a;
+  }
+
+  .pb-gallery {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .pb-artwork {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pb-frame {
+    width: 85%;
+    aspect-ratio: 4/3;
+    background: #f5f3f0;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    position: relative;
+  }
+
+  .pb-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 40% 35%, rgba(190,170,140,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 65% 65%, rgba(170,155,130,0.1) 0%, transparent 45%);
+  }
+
+  .pb-caption {
+    text-align: center;
+    max-width: 220px;
+  }
+
+  .pb-caption h4 {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .pb-caption .artist {
+    font-size: 10px;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .pb-caption .prompt-snippet {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #bbb;
+    line-height: 1.5;
+    padding: 6px 10px;
+    background: #fafaf8;
+    border-radius: 4px;
+    border: 1px solid #f0eeea;
+  }
+
+  .pb-copy-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .pb-copy-btn {
+    font-size: 9px;
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #666;
+  }
+
+  /* ═══════════════════════════════════════════
+     DIRECTION C — Swiss / Data Grid
+     Inspired by: Müller-Brockmann, Are.na, Bloomberg
+  ═══════════════════════════════════════════ */
+  .preview-c {
+    background: #f7f7f5;
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pc-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #1a1a1a;
+  }
+
+  .pc-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pc-stats {
+    display: flex;
+    gap: 12px;
+  }
+
+  .pc-stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #999;
+  }
+
+  .pc-stat b {
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+
+  .pc-search-row {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pc-search {
+    flex: 1;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #e0deda;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  .pc-filter-btn {
+    height: 30px;
+    padding: 0 12px;
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .pc-cat-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #e0deda;
+    overflow-x: auto;
+  }
+
+  .pc-cat-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 6px 10px;
+    color: #999;
+    border-right: 1px solid #e0deda;
+    white-space: nowrap;
+  }
+
+  .pc-cat-item.active {
+    color: #1a1a1a;
+    background: #fff;
+    font-weight: 500;
+  }
+
+  .pc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .pc-card {
+    background: #fff;
+    border: 1px solid #e8e6e2;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pc-card-img {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, #eae7e1 0%, #dbd6cd 100%);
+    position: relative;
+  }
+
+  .pc-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 45% 45%, rgba(170,155,130,0.15) 0%, transparent 50%);
+  }
+
+  .pc-card-body {
+    padding: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pc-card-body .id-cat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pc-card-body .id-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #ccc;
+  }
+
+  .pc-card-body .cat-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    padding: 1px 5px;
+    background: #f0eeea;
+    border-radius: 2px;
+    color: #888;
+  }
+
+  .pc-card-body h4 {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .pc-card-body .prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #bbb;
+    line-height: 1.5;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .pc-card-actions {
+    display: flex;
+    gap: 4px;
+    padding: 0 8px 8px;
+  }
+
+  .pc-card-actions button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    padding: 3px 8px;
+    border: 1px solid #e0deda;
+    border-radius: 3px;
+    color: #888;
+  }
+
+  .pc-card-actions .primary {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+  }
+
+  /* ── Full Preview Section ── */
+  .full-previews {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 32px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .directions {
+      grid-template-columns: 1fr;
+      padding: 0 20px 40px;
+    }
+    .page-header {
+      padding: 40px 20px 30px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+    }
+    .full-previews {
+      padding: 0 20px 60px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Design Directions</h1>
+  <p>GPT-Image2 Prompt Gallery — three distinct approaches to framing AI-generated art and prompts. Pick a direction (or a blend).</p>
+  <div class="instruction">A = Editorial &nbsp;/&nbsp; B = Museum &nbsp;/&nbsp; C = Swiss Grid</div>
+</header>
+
+<section class="directions">
+
+  <!-- ═══ Direction A ═══ -->
+  <div class="direction">
+    <div class="dir-label">
+      <div class="num">Direction A</div>
+      <h2>Editorial Magazine</h2>
+      <div class="sub">Warm, literary, sophisticated</div>
+    </div>
+    <div class="dir-meta">
+      <strong>Vibe:</strong> Pentagram meets It's Nice That<br>
+      <strong>Type:</strong> <span>DM Serif Display</span> headings + <span>DM Sans</span> body<br>
+      <strong>Color:</strong> Warm off-white <span>#FAFAF8</span>, charcoal text, no bright accents<br>
+      <strong>Layout:</strong> Mixed card sizes, featured hero card, generous padding<br>
+      <strong>For you:</strong> The prompts read like articles — literary, intentional, collectible. Best if your audience values taste and curation.
+    </div>
+    <div class="preview-canvas preview-a">
+      <div class="pa-topbar">
+        <div class="pa-logo">Prompt Gallery</div>
+        <div class="pa-nav">
+          <span>All</span>
+          <span>Latest</span>
+          <span>About</span>
+        </div>
+      </div>
+      <div class="pa-hero">
+        <h2>Prompt as Art</h2>
+        <p>A curated collection of GPT-Image2 prompts</p>
+      </div>
+      <div class="pa-search">
+        <div class="icon"></div>
+        <span class="placeholder">Search prompts...</span>
+      </div>
+      <div class="pa-chips">
+        <div class="pa-chip active">All</div>
+        <div class="pa-chip">UI</div>
+        <div class="pa-chip">Poster</div>
+        <div class="pa-chip">Photo</div>
+      </div>
+      <div class="pa-card-big">
+        <div class="img-area"></div>
+        <div class="text-area">
+          <h4>Chinese Ink Landscape in Song Dynasty Style</h4>
+          <p>Create a traditional Chinese ink wash painting, distant mountains and misty waters...</p>
+          <div class="copy-btn">Copy Prompt</div>
+        </div>
+      </div>
+      <div class="pa-grid">
+        <div class="pa-card">
+          <div class="pa-card-img"></div>
+          <div class="pa-card-body">
+            <h4>Social Media Screenshot</h4>
+            <div class="meta">@Ailln_AI</div>
+          </div>
+        </div>
+        <div class="pa-card">
+          <div class="pa-card-img"></div>
+          <div class="pa-card-body">
+            <h4>Football Movie Poster</h4>
+            <div class="meta">Community</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Direction B ═══ -->
+  <div class="direction">
+    <div class="dir-label">
+      <div class="num">Direction B</div>
+      <h2>Museum Gallery</h2>
+      <div class="sub">Minimal, contemplative, art-forward</div>
+    </div>
+    <div class="dir-meta">
+      <strong>Vibe:</strong> MoMA meets Fondation Beyeler<br>
+      <strong>Type:</strong> <span>DM Sans 300</span> ultra-light headings, small-caps labels<br>
+      <strong>Color:</strong> Pure white <span>#FFFFFF</span>, minimal UI chrome<br>
+      <strong>Layout:</strong> Single column, generous vertical space, images centered like art on walls<br>
+      <strong>For you:</strong> Each prompt is an exhibit. Maximum focus on the image. Best for a contemplative browsing experience.
+    </div>
+    <div class="preview-canvas preview-b">
+      <div class="pb-topbar">
+        <div class="pb-logo">GALLERY</div>
+        <div class="pb-count">9 works</div>
+      </div>
+      <div class="pb-hero">
+        <h2>Current Exhibition</h2>
+        <div class="title">GPT-Image2 Prompts</div>
+      </div>
+      <div class="pb-search">
+        <span class="placeholder">Search</span>
+      </div>
+      <div class="pb-filter-row">
+        <div class="pb-filter-item active">All</div>
+        <div class="pb-filter-item">Poster</div>
+        <div class="pb-filter-item">Photo</div>
+        <div class="pb-filter-item">Character</div>
+      </div>
+      <div class="pb-gallery">
+        <div class="pb-artwork">
+          <div class="pb-frame"></div>
+          <div class="pb-caption">
+            <h4>Chinese Ink Landscape</h4>
+            <div class="artist">@art_master</div>
+            <div class="prompt-snippet">Create a traditional Chinese ink wash painting, distant mountains...</div>
+          </div>
+          <div class="pb-copy-row">
+            <div class="pb-copy-btn">Copy Prompt</div>
+            <div class="pb-copy-btn">Source</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Direction C ═══ -->
+  <div class="direction">
+    <div class="dir-label">
+      <div class="num">Direction C</div>
+      <h2>Swiss Data Grid</h2>
+      <div class="sub">Structured, dense, information-first</div>
+    </div>
+    <div class="dir-meta">
+      <strong>Vibe:</strong> Are.na meets Bloomberg Terminal<br>
+      <strong>Type:</strong> <span>JetBrains Mono</span> throughout, data-forward<br>
+      <strong>Color:</strong> Cool grey <span>#F7F7F5</span>, tabular borders, black active states<br>
+      <strong>Layout:</strong> Tight uniform grid, all cards same size, category badges, ID numbers<br>
+      <strong>For you:</strong> Every prompt is a data point. Best for power users who want to scan, filter, and copy fast. Scales well to 100+ cases.
+    </div>
+    <div class="preview-canvas preview-c">
+      <div class="pc-topbar">
+        <div class="pc-logo">PROMPT.DB</div>
+        <div class="pc-stats">
+          <span class="pc-stat"><b>9</b> cases</span>
+          <span class="pc-stat"><b>11</b> cats</span>
+        </div>
+      </div>
+      <div class="pc-search-row">
+        <div class="pc-search">Search prompts, titles, sources...</div>
+        <div class="pc-filter-btn">Filter</div>
+      </div>
+      <div class="pc-cat-row">
+        <div class="pc-cat-item active">ALL</div>
+        <div class="pc-cat-item">UI 1</div>
+        <div class="pc-cat-item">POSTER 3</div>
+        <div class="pc-cat-item">CHAR 1</div>
+        <div class="pc-cat-item">SCENE 2</div>
+      </div>
+      <div class="pc-grid">
+        <div class="pc-card">
+          <div class="pc-card-img"></div>
+          <div class="pc-card-body">
+            <div class="id-cat">
+              <span class="id-num">#001</span>
+              <span class="cat-badge">UI</span>
+            </div>
+            <h4>Social Media Screenshot</h4>
+            <div class="prompt">Create a dark mode X screenshot...</div>
+          </div>
+          <div class="pc-card-actions">
+            <button class="primary">Copy</button>
+            <button>Source</button>
+          </div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-card-img"></div>
+          <div class="pc-card-body">
+            <div class="id-cat">
+              <span class="id-num">#002</span>
+              <span class="cat-badge">POSTER</span>
+            </div>
+            <h4>Football Movie Poster</h4>
+            <div class="prompt">Generate a football-themed movie poster...</div>
+          </div>
+          <div class="pc-card-actions">
+            <button class="primary">Copy</button>
+            <button>Source</button>
+          </div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-card-img"></div>
+          <div class="pc-card-body">
+            <div class="id-cat">
+              <span class="id-num">#003</span>
+              <span class="cat-badge">OTHER</span>
+            </div>
+            <h4>Laoganma Livestream</h4>
+            <div class="prompt">Trump selling Laoganma in a Douyin livestream...</div>
+          </div>
+          <div class="pc-card-actions">
+            <button class="primary">Copy</button>
+            <button>Source</button>
+          </div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-card-img"></div>
+          <div class="pc-card-body">
+            <div class="id-cat">
+              <span class="id-num">#004</span>
+              <span class="cat-badge">OTHER</span>
+            </div>
+            <h4>Ink Wash Landscape</h4>
+            <div class="prompt">Chinese ink wash mountain and water...</div>
+          </div>
+          <div class="pc-card-actions">
+            <button class="primary">Copy</button>
+            <button>Source</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GPT-Image2 Gallery — Editorial Magazine Style</title>
+<style>
+  /* ═══════════════════════════════════════════════
+     Direction A — Editorial Magazine
+     Inspired by: Pentagram, It's Nice That, Monocle
+     ═══════════════════════════════════════════════
+     Type: Playfair Display (serif headings) + Source Sans 3 (body)
+     Color: #FAF9F7 warm paper / #1D1D1B warm black / #C4A47C gold accent
+     Layout: Mixed card sizes, featured hero, generous whitespace
+  */
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #FAF9F7;
+    --bg-card: #FFFFFF;
+    --bg-warm: #F3F0EB;
+    --text: #1D1D1B;
+    --text-2: #5A5A56;
+    --text-3: #9A9A94;
+    --text-4: #C4C4BC;
+    --accent: #C4A47C;
+    --accent-dark: #A68B63;
+    --border: #E8E4DE;
+    --border-2: #D5D0C8;
+    --serif: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+    --sans: 'Source Sans 3', 'Noto Sans SC', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --radius: 12px;
+    --container: 1200px;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--text-2); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--text); }
+  button { cursor:pointer; border:none; background:none; font-family:inherit; font-size:inherit; color:inherit; }
+  img { max-width:100%; display:block; }
+
+  /* ── Topbar ── */
+  .topbar {
+    max-width: var(--container); margin: 0 auto;
+    padding: 24px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .brand em {
+    font-style: italic; color: var(--accent-dark);
+  }
+  .nav {
+    display: flex; align-items: center; gap: 24px;
+    font-size: 14px; color: var(--text-3);
+    font-weight: 400;
+  }
+  .nav a { font-weight: 400; }
+  .nav a:hover { color: var(--text); }
+  .nav .gh { display:flex; align-items:center; }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: var(--container); margin: 0 auto;
+    padding: 64px 40px 48px;
+  }
+  .hero-eyebrow {
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-dark); font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    max-width: 600px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+  .hero p {
+    font-size: 17px; color: var(--text-2);
+    max-width: 480px; line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── Search + Filters ── */
+  .controls {
+    max-width: var(--container); margin: 0 auto;
+    padding: 0 40px 32px;
+  }
+  .searchBox {
+    position: relative; max-width: 480px;
+    margin-bottom: 20px;
+  }
+  .searchBox svg {
+    position: absolute; left: 16px; top: 50%;
+    transform: translateY(-50%); color: var(--text-4);
+  }
+  .searchBox input {
+    width: 100%; padding: 12px 40px 12px 44px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--sans); font-size: 14px;
+    color: var(--text); outline: none;
+    transition: border-color 0.2s;
+  }
+  .searchBox input:focus { border-color: var(--accent); }
+  .searchBox input::placeholder { color: var(--text-4); }
+  .searchBox .clear {
+    position: absolute; right: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-4); display:flex; align-items:center;
+  }
+  .searchBox .clear:hover { color: var(--text); }
+
+  .catChips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .chip {
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    font-size: 13px; color: var(--text-2);
+    font-weight: 400;
+    transition: all 0.2s;
+  }
+  .chip:hover { border-color: var(--text-2); color: var(--text); }
+  .chip.active {
+    background: var(--text); color: var(--bg);
+    border-color: var(--text);
+  }
+  .chip .count {
+    font-size: 11px; color: var(--text-4);
+    margin-left: 4px;
+  }
+  .chip.active .count { color: var(--text-3); }
+
+  .tagToggle {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 12px; color: var(--text-3);
+    padding: 4px 0; margin-bottom: 8px;
+    border-bottom: 1px dotted var(--border);
+    transition: color 0.2s;
+  }
+  .tagToggle:hover { color: var(--text); }
+
+  .tagRow {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    padding: 12px 0;
+    animation: fadeIn 0.2s;
+  }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+  .tagLabel { font-size: 12px; color: var(--text-4); margin-right: 4px; font-style: italic; }
+  .tagChip {
+    padding: 4px 12px; font-size: 12px;
+    border: 1px solid var(--border); border-radius: 4px;
+    color: var(--text-3); transition: all 0.2s;
+  }
+  .tagChip:hover { border-color: var(--text-3); color: var(--text); }
+  .tagChip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .statusLine {
+    font-size: 13px; color: var(--text-3);
+    padding: 8px 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .statusLine b { color: var(--text); font-weight: 500; }
+  .resetLink { font-size: 12px; color: var(--text-3); border-bottom: 1px dotted var(--border); transition:color 0.2s; }
+  .resetLink:hover { color: var(--text); }
+
+  /* ── Gallery: Bento layout ── */
+  .gallery {
+    max-width: var(--container); margin: 0 auto;
+    padding: 0 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    grid-auto-rows: minmax(0, auto);
+  }
+  /* first card is "featured" and spans wider */
+  .card.featured {
+    grid-column: 1 / 4;
+    grid-row: span 1;
+  }
+  .card:not(.featured) {
+    grid-column: span 3;
+  }
+  /* After the first 2, alternate: 2-col then 3-col patterns */
+  .card:nth-child(n+3):nth-child(odd) {
+    grid-column: span 2;
+  }
+  .card:nth-child(n+3):nth-child(even) {
+    grid-column: span 2;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  .card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+  .card.featured {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+  }
+  .card.featured .cardImg { aspect-ratio: auto; min-height: 280px; }
+  .card.featured .cardContent { padding: 28px; display:flex; flex-direction:column; justify-content:center; }
+  .card.featured .cardTitle { font-size: 22px; }
+  .card.featured .cardPrompt { -webkit-line-clamp: 5; }
+
+  .cardImg {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    background: var(--bg-warm);
+  }
+  .cardImg img {
+    width:100%;height:100%;object-fit:cover;
+    transition: transform 0.5s ease;
+  }
+  .card:hover .cardImg img { transform: scale(1.04); }
+  .cardImg .overlay {
+    position:absolute; inset:0;
+    background: rgba(29,29,27,0.3);
+    display:flex; align-items:center; justify-content:center;
+    color: #fff; opacity:0;
+    transition: opacity 0.3s;
+  }
+  .cardImg:hover .overlay { opacity:1; }
+
+  .noImg {
+    width:100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:6px; color:var(--text-4);
+  }
+
+  .cardContent { padding: 16px 18px 18px; }
+  .cardHeader { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .cardCat {
+    font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color: var(--accent-dark); font-weight:500;
+  }
+  .cardNum {
+    font-family: var(--mono); font-size:11px; color:var(--text-4);
+  }
+  .cardTitle {
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 600;
+    line-height: 1.35; letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .cardTags { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+  .cardTag {
+    font-size:11px; padding:2px 8px;
+    background:var(--bg-warm); border-radius:3px;
+    color:var(--text-3);
+  }
+  .cardPrompt {
+    font-size:13px; color:var(--text-2); line-height:1.6;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+    overflow:hidden; margin-bottom:12px;
+    font-weight:300;
+  }
+  .cardActions { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .copyBtn {
+    display:inline-flex; align-items:center; gap:5px;
+    padding:7px 16px;
+    background: var(--text); color: var(--bg);
+    border-radius:6px; font-size:12px; font-weight:500;
+    transition: all 0.2s;
+  }
+  .copyBtn:hover { background: var(--accent-dark); }
+  .copyBtn.copied { background: #16A34A; }
+  .srcLink {
+    font-size:12px; color:var(--text-3);
+    display:inline-flex; align-items:center; gap:4px;
+    font-style:italic;
+  }
+  .srcLink:hover { color:var(--text); }
+
+  /* ── Empty ── */
+  .empty {
+    text-align:center; padding:80px 40px; color:var(--text-3);
+  }
+  .empty svg { margin:0 auto 12px; opacity:0.25; }
+  .empty p { font-size:15px; margin-bottom:16px; }
+  .empty button {
+    padding:10px 24px; background:var(--text); color:var(--bg);
+    border-radius:6px; font-size:13px;
+  }
+
+  /* ── Modal ── */
+  .modal {
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(29,29,27,0.8);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    animation:fadeIn 0.2s;
+    backdrop-filter:blur(4px);
+  }
+  .modalInner {
+    max-width:880px; width:100%; max-height:90vh;
+    background:var(--bg-card);
+    border-radius:var(--radius);
+    overflow:auto; position:relative;
+    display:grid; grid-template-columns:1.2fr 1fr;
+    animation: modalIn 0.25s ease-out;
+  }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.97)} to{opacity:1;transform:scale(1)} }
+  .modalClose {
+    position:absolute;top:16px;right:16px;z-index:10;
+    width:36px;height:36px;border-radius:50%;
+    background:rgba(0,0,0,0.5); color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    transition:background 0.2s;
+  }
+  .modalClose:hover { background:rgba(0,0,0,0.7); }
+  .modalImg { background:var(--bg-warm); }
+  .modalImg img { width:100%;height:100%;object-fit:cover;min-height:300px; }
+  .modalBody { padding:28px; display:flex;flex-direction:column;gap:14px; }
+  .modalMeta { display:flex;align-items:center;gap:8px;flex-wrap:wrap; }
+  .modalCat { font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-dark);font-weight:500; }
+  .modalTag { font-size:11px;padding:2px 8px;background:var(--bg-warm);border-radius:3px;color:var(--text-3); }
+  .modalTitle { font-family:var(--serif);font-size:22px;font-weight:600;line-height:1.3;letter-spacing:-0.02em; }
+  .modalSrc { font-size:13px;color:var(--text-3);font-style:italic;display:inline-flex;align-items:center;gap:5px; }
+  .modalSrc:hover { color:var(--text); }
+  .promptLabel { font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-4);font-weight:500; }
+  .modalPrompt {
+    font-size:13px;line-height:1.7;color:var(--text-2);
+    background:var(--bg-warm); padding:16px; border-radius:8px;
+    white-space:pre-wrap;word-break:break-word;
+    overflow-y:auto;max-height:280px;
+    font-weight:300;
+  }
+  .modalCopy {
+    width:100%; padding:12px;
+    background:var(--text); color:var(--bg);
+    border-radius:8px; font-size:13px; font-weight:500;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    transition: background 0.2s;
+  }
+  .modalCopy:hover { background:var(--accent-dark); }
+  .modalCopy.copied { background:#16A34A; }
+
+  .scrollTop {
+    position:fixed;bottom:24px;right:24px;z-index:50;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--text); color:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 16px rgba(0,0,0,0.1);
+    transition:transform 0.2s;
+    animation:fadeIn 0.2s;
+  }
+  .scrollTop:hover { transform:translateY(-2px); }
+
+  .footer {
+    border-top:1px solid var(--border);
+    padding:28px 40px;
+    text-align:center;
+    font-size:13px;color:var(--text-3);
+    font-weight:300;
+  }
+
+  @media(max-width:900px) {
+    .gallery { grid-template-columns:1fr 1fr; }
+    .card.featured { grid-column:1/-1; }
+    .card:not(.featured) { grid-column:span 1; }
+    .card:nth-child(n+3) { grid-column:span 1; }
+    .card.featured { grid-template-columns:1fr; }
+    .card.featured .cardImg { aspect-ratio:16/9;min-height:unset; }
+    .modalInner { grid-template-columns:1fr; }
+    .modalImg { max-height:40vh;overflow:hidden; }
+    .modalImg img { min-height:unset; }
+  }
+  @media(max-width:600px) {
+    .gallery { grid-template-columns:1fr; padding:0 16px 40px; }
+    .card.featured,.card:not(.featured),.card:nth-child(n+3) { grid-column:1; }
+    .hero,.controls { padding-left:16px;padding-right:16px; }
+    .topbar { padding:16px; }
+    .nav { display:none; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@19/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@19/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+const SAMPLE_DATA = {
+  repository: "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
+  totalCases: 9,
+  categories: [
+    {id:"ui",name:"UI与界面",count:1},
+    {id:"infographic",name:"图表与信息图",count:0},
+    {id:"poster",name:"海报与排版",count:3},
+    {id:"product",name:"产品与电商",count:0},
+    {id:"brand",name:"品牌与Logo",count:0},
+    {id:"architecture",name:"建筑与空间",count:0},
+    {id:"photo",name:"摄影与写实",count:0},
+    {id:"illustration",name:"插画与艺术",count:0},
+    {id:"character",name:"角色与人物",count:1},
+    {id:"scene",name:"场景与叙事",count:2},
+    {id:"other",name:"其他",count:2}
+  ],
+  tags: ["3D","中国风","写实","卡通","复古","暗色","极简","科技"],
+  cases: [
+    {id:1,title:"社媒界面截图",image:"",sourceLabel:"@Ailln_AI",sourceUrl:"https://x.com/Ailln_AI",prompt:"画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文的中文内容：今天想推荐一位很棒的 AI Builder。\n底部添加一张深色官方宣传风格海报。",promptPreview:"画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。正文的中文内容：今天想推荐一位很棒的 AI Builder...",category:"ui",tags:["极简","暗色"]},
+    {id:2,title:"足球主题电影海报",image:"",sourceLabel:"社区分享",sourceUrl:"",prompt:"生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，双手高举并披着波黑国旗，神情热血、坚定、自信。",promptPreview:"生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝...",category:"poster",tags:["写实"]},
+    {id:3,title:"老干妈风味直播",image:"",sourceLabel:"小红书号989137706",sourceUrl:"",prompt:"特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感，左下角弹幕飘着「特斯拉车主：求上链接」。",promptPreview:"特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感...",category:"other",tags:["科技","复古"]},
+    {id:4,title:"中国风水墨山水",image:"",sourceLabel:"@art_master",sourceUrl:"https://x.com/art_master",prompt:"创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞。整体色调淡雅，留白大气，仿宋代山水画风格。",promptPreview:"创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞...",category:"other",tags:["中国风"]},
+    {id:5,title:"3D卡通角色设计",image:"",sourceLabel:"@designhub",sourceUrl:"https://x.com/designhub",prompt:"设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌。Q版比例，光滑的塑料质感，柔和的studio灯光。",promptPreview:"设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌...",category:"character",tags:["3D","卡通"]},
+    {id:8,title:"图形置换字体设计",image:"",sourceLabel:"@xiaoxiaodong01",sourceUrl:"https://x.com/xiaoxiaodong01/status/2059204254871736375",prompt:"图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。适合用于创意字体设计和品牌标识。",promptPreview:"图形置换：把某个笔画替换成图形元素，但仍保持字形可识别...",category:"poster",tags:[]}
+  ]
+};
+
+function App() {
+  const [data, setData] = useState(null);
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeTag, setActiveTag] = useState('all');
+  const [copiedId, setCopiedId] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [showTags, setShowTags] = useState(false);
+  const [scrollTop, setScrollTop] = useState(false);
+
+  useEffect(() => {
+    fetch('./cases.json')
+      .then(r => r.json())
+      .then(json => setData(json))
+      .catch(() => setData(SAMPLE_DATA));
+  }, []);
+
+  useEffect(() => {
+    const fn = () => setScrollTop(window.scrollY > 500);
+    window.addEventListener('scroll', fn, {passive:true});
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!data) return [];
+    let items = data.cases;
+    if (activeCategory !== 'all') items = items.filter(c => c.category === activeCategory);
+    if (activeTag !== 'all') items = items.filter(c => c.tags.includes(activeTag));
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      items = items.filter(c => c.title.toLowerCase().includes(q) || c.prompt.toLowerCase().includes(q) || c.sourceLabel.toLowerCase().includes(q));
+    }
+    return items;
+  }, [data, activeCategory, activeTag, search]);
+
+  const copy = useCallback((id, prompt) => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    });
+  }, []);
+
+  const reset = () => { setSearch(''); setActiveCategory('all'); setActiveTag('all'); };
+
+  if (!data) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--text-3)'}}>Loading...</div>;
+
+  const activeCats = data.categories.filter(c => c.count > 0);
+
+  return (
+    <div>
+      <header className="topbar">
+        <div className="brand">Prompt <em>Gallery</em></div>
+        <nav className="nav">
+          <a href="#">All</a>
+          <a href="#">Latest</a>
+          <a href="#">Templates</a>
+          <a href={data.repository} target="_blank" className="gh">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+        </nav>
+      </header>
+
+      <section className="hero">
+        <div className="hero-eyebrow">Curated Collection — {data.totalCases} Prompts</div>
+        <h1>Where <em>Prompts</em> Become Art</h1>
+        <p>A curated gallery of GPT-Image2 prompts, collected from the community. Browse, copy, and create.</p>
+      </section>
+
+      <div className="controls">
+        <div className="searchBox">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search prompts, titles, sources..." value={search} onChange={e => setSearch(e.target.value)} />
+          {search && <button className="clear" onClick={() => setSearch('')}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>}
+        </div>
+
+        <div className="catChips">
+          <button className={`chip ${activeCategory==='all'?'active':''}`} onClick={() => setActiveCategory('all')}>
+            All <span className="count">{data.totalCases}</span>
+          </button>
+          {activeCats.map(cat => (
+            <button key={cat.id} className={`chip ${activeCategory===cat.id?'active':''}`} onClick={() => setActiveCategory(cat.id)}>
+              {cat.name} <span className="count">{cat.count}</span>
+            </button>
+          ))}
+        </div>
+
+        <button className="tagToggle" onClick={() => setShowTags(!showTags)}>
+          {showTags ? 'Hide' : 'Show'} tags {showTags ? '↑' : '↓'}
+        </button>
+
+        {showTags && data.tags.length > 0 && (
+          <div className="tagRow">
+            <span className="tagLabel">Tags:</span>
+            <button className={`tagChip ${activeTag==='all'?'active':''}`} onClick={() => setActiveTag('all')}>All</button>
+            {data.tags.map(t => (
+              <button key={t} className={`tagChip ${activeTag===t?'active':''}`} onClick={() => setActiveTag(t)}>{t}</button>
+            ))}
+          </div>
+        )}
+
+        <div className="statusLine">
+          <span>Showing <b>{filtered.length}</b> of {data.totalCases}</span>
+          {(search || activeCategory !== 'all' || activeTag !== 'all') && (
+            <button className="resetLink" onClick={reset}>Reset filters</button>
+          )}
+        </div>
+      </div>
+
+      <div className="gallery">
+        {filtered.map((c, i) => {
+          const catName = data.categories.find(cat => cat.id === c.category)?.name || '其他';
+          const isFeatured = i === 0 && !search && activeCategory === 'all' && activeTag === 'all';
+          return (
+            <article key={c.id} className={`card ${isFeatured ? 'featured' : ''}`}>
+              <div className="cardImg" onClick={() => setPreview(c)}>
+                {c.image ? (
+                  <img src={`.${c.image}`} alt={c.title} loading="lazy" />
+                ) : (
+                  <div className="noImg">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <span style={{fontSize:10,letterSpacing:'0.1em'}}>IMAGE</span>
+                  </div>
+                )}
+                <div className="overlay">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+              </div>
+              <div className="cardContent">
+                <div className="cardHeader">
+                  <span className="cardCat">{catName}</span>
+                  <span className="cardNum">No.{String(c.id).padStart(2,'0')}</span>
+                </div>
+                <h3 className="cardTitle">{c.title}</h3>
+                {c.tags.length > 0 && (
+                  <div className="cardTags">
+                    {c.tags.map(t => <span key={t} className="cardTag">{t}</span>)}
+                  </div>
+                )}
+                <p className="cardPrompt">{c.promptPreview}</p>
+                <div className="cardActions">
+                  <button className={`copyBtn ${copiedId===c.id?'copied':''}`} onClick={() => copy(c.id, c.prompt)}>
+                    {copiedId===c.id ? '✓ Copied' : 'Copy Prompt'}
+                  </button>
+                  {c.sourceUrl && (
+                    <a href={c.sourceUrl} target="_blank" className="srcLink">
+                      {c.sourceLabel} →
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="empty">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>No matching prompts found</p>
+          <button onClick={reset}>Reset Filters</button>
+        </div>
+      )}
+
+      {preview && (
+        <div className="modal" onClick={() => setPreview(null)}>
+          <div className="modalInner" onClick={e => e.stopPropagation()}>
+            <button className="modalClose" onClick={() => setPreview(null)}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div className="modalImg">
+              {preview.image ? (
+                <img src={`.${preview.image}`} alt={preview.title} />
+              ) : (
+                <div style={{width:'100%',height:'100%',minHeight:300,display:'flex',alignItems:'center',justifyContent:'center',color:'var(--text-4)',background:'var(--bg-warm)'}}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+              )}
+            </div>
+            <div className="modalBody">
+              <div className="modalMeta">
+                <span className="modalCat">{data.categories.find(cat => cat.id === preview.category)?.name || '其他'}</span>
+                {preview.tags.map(t => <span key={t} className="modalTag">{t}</span>)}
+              </div>
+              <h2 className="modalTitle">{preview.title}</h2>
+              {preview.sourceUrl && <a href={preview.sourceUrl} target="_blank" className="modalSrc">{preview.sourceLabel} →</a>}
+              <div>
+                <div className="promptLabel">Prompt</div>
+                <pre className="modalPrompt">{preview.prompt}</pre>
+              </div>
+              <button className={`modalCopy ${copiedId===preview.id?'copied':''}`} onClick={() => copy(preview.id, preview.prompt)}>
+                {copiedId===preview.id ? '✓ Copied to clipboard' : 'Copy Full Prompt'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {scrollTop && (
+        <button className="scrollTop" onClick={() => window.scrollTo({top:0,behavior:'smooth'})}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      )}
+
+      <footer className="footer">
+        <p>GPT-Image2 Prompt Gallery — Collected from the community, for learning and inspiration.</p>
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

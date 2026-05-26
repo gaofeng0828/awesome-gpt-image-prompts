@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GPT-Image2 Gallery — Museum Style</title>
+<style>
+  /* ═══════════════════════════════════════════════
+     Direction B — Museum Gallery
+     Inspired by: MoMA, Tate Modern, Fondation Beyeler
+     ═══════════════════════════════════════════════
+     Type: Inter (light 300 headings, 400 body)
+     Color: Pure white #FFFFFF / near-black #111
+     Layout: Single column, generous space, centered images
+     Feel: Contemplative, art-forward, each prompt is an exhibit
+  */
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #FFFFFF;
+    --bg-subtle: #FAFAFA;
+    --text: #111111;
+    --text-2: #555;
+    --text-3: #999;
+    --text-4: #CCC;
+    --border: #E8E8E8;
+    --border-2: #F0F0F0;
+    --sans: 'Inter', 'Noto Sans SC', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --container: 780px;
+    --container-wide: 1000px;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color:var(--text-2); text-decoration:none; transition:color 0.2s; }
+  a:hover { color:var(--text); }
+  button { cursor:pointer; border:none; background:none; font-family:inherit; color:inherit; }
+  img { max-width:100%; display:block; }
+
+  /* ── Topbar ── */
+  .topbar {
+    max-width: var(--container-wide); margin:0 auto;
+    padding: 28px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .topMeta {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--text-4);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 48px 48px 56px;
+    max-width: var(--container); margin: 0 auto;
+  }
+  .heroLabel {
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 15px; font-weight: 300;
+    color: var(--text-3); max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* ── Search (minimal underline style) ── */
+  .searchArea {
+    max-width: 320px; margin: 0 auto 32px;
+    padding: 0 48px;
+  }
+  .searchUnderline {
+    position: relative;
+    display: flex; align-items: center;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .searchUnderline:focus-within { border-color: var(--text); }
+  .searchUnderline svg {
+    color: var(--text-4); flex-shrink:0;
+    margin-right: 10px;
+  }
+  .searchUnderline input {
+    width:100%; padding:8px 0;
+    border:none; outline:none;
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 300;
+    color: var(--text); background: transparent;
+  }
+  .searchUnderline input::placeholder { color: var(--text-4); }
+  .searchUnderline .clear {
+    position:absolute; right:0; top:50%; transform:translateY(-50%);
+    color:var(--text-4); display:flex;
+  }
+  .searchUnderline .clear:hover { color:var(--text); }
+
+  /* ── Filters ── */
+  .filterArea {
+    max-width: var(--container); margin:0 auto;
+    padding: 0 48px;
+  }
+  .catRow {
+    display: flex; justify-content: center;
+    gap: 32px;
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+  }
+  .catItem {
+    font-size: 13px; font-weight: 400;
+    color: var(--text-4);
+    position: relative;
+    padding-bottom: 8px;
+    transition: color 0.2s;
+  }
+  .catItem:hover { color: var(--text-2); }
+  .catItem.active { color: var(--text); }
+  .catItem.active::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1.5px; background: var(--text);
+  }
+  .catCount {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--text-4); margin-left: 4px;
+  }
+  .catItem.active .catCount { color: var(--text-3); }
+
+  .tagToggleBtn {
+    display: block; margin: 0 auto;
+    font-size: 11px; color: var(--text-4);
+    letter-spacing: 0.08em;
+    padding: 8px 0;
+    transition: color 0.2s;
+  }
+  .tagToggleBtn:hover { color: var(--text-2); }
+
+  .tagRow {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 8px; padding: 16px 0;
+    animation: fadeIn 0.2s;
+  }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .tagChip {
+    padding: 5px 14px; font-size: 12px; font-weight: 300;
+    color: var(--text-3);
+    border: 1px solid var(--border); border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .tagChip:hover { border-color:var(--text-2); color:var(--text); }
+  .tagChip.active { background:var(--text); border-color:var(--text); color:#fff; }
+
+  .statusLine {
+    text-align:center; padding:20px 0 8px;
+    font-size: 12px; color: var(--text-4);
+    font-family: var(--mono);
+  }
+  .statusLine b { color:var(--text-2); font-weight:400; }
+  .resetLink {
+    font-size: 11px; color:var(--text-4);
+    border-bottom:1px dotted var(--border);
+    margin-left:12px;
+    transition:color 0.2s;
+  }
+  .resetLink:hover { color:var(--text); }
+
+  /* ── Gallery (single column, exhibit style) ── */
+  .gallery {
+    max-width: var(--container); margin: 0 auto;
+    padding: 32px 48px 80px;
+  }
+  .exhibit {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border-2);
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .exhibit:last-child { border-bottom: none; }
+
+  .exhibitFrame {
+    width: 100%;
+    max-width: 620px;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 24px;
+    transition: box-shadow 0.4s;
+  }
+  .exhibitFrame:hover {
+    box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+  }
+  .exhibitFrame img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .exhibitFrame:hover img { transform: scale(1.01); }
+  .noImg {
+    width:100%; aspect-ratio:4/3;
+    background:var(--bg-subtle);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:8px;
+    color:var(--text-4);
+  }
+
+  .exhibitCaption {
+    text-align: center;
+    max-width: 520px;
+    width: 100%;
+  }
+  .exhibitNum {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-4); letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .exhibitTitle {
+    font-size: 18px; font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .exhibitArtist {
+    font-size: 13px; font-weight: 300;
+    color: var(--text-3);
+    margin-bottom: 12px;
+  }
+  .exhibitTags {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 6px; margin-bottom: 16px;
+  }
+  .exhibitTag {
+    font-size: 11px; padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px; color: var(--text-3);
+    font-weight: 300;
+  }
+
+  .exhibitPrompt {
+    font-family: var(--mono);
+    font-size: 12px; line-height: 1.7;
+    color: var(--text-3);
+    background: var(--bg-subtle);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    text-align: left;
+    max-height: 120px;
+    overflow: hidden;
+    position: relative;
+  }
+  .exhibitPrompt::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--bg-subtle));
+  }
+
+  .exhibitActions {
+    display: flex; justify-content: center; gap: 12px;
+  }
+  .actionBtn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    font-size: 12px; font-weight: 400;
+    color: var(--text-2);
+    transition: all 0.2s;
+  }
+  .actionBtn:hover {
+    border-color: var(--text); color: var(--text);
+  }
+  .actionBtn.primary {
+    background: var(--text); color: var(--bg);
+    border-color: var(--text);
+  }
+  .actionBtn.primary:hover { opacity: 0.8; }
+  .actionBtn.copied { background:#16A34A; border-color:#16A34A; color:#fff; }
+
+  /* ── Empty ── */
+  .empty {
+    text-align:center; padding:80px 48px;
+    color:var(--text-4);
+  }
+  .empty p { font-size:15px; font-weight:300; margin-bottom:16px; color:var(--text-3); }
+  .empty button {
+    padding:8px 20px;
+    border:1px solid var(--border);
+    border-radius:3px;
+    font-size:12px; color:var(--text-2);
+    transition:all 0.2s;
+  }
+  .empty button:hover { border-color:var(--text); color:var(--text); }
+
+  /* ── Modal ── */
+  .modal {
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(255,255,255,0.95);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    animation:fadeIn 0.2s;
+    backdrop-filter:blur(8px);
+  }
+  .modalInner {
+    max-width:800px;width:100%;max-height:90vh;
+    overflow:auto;
+    display:flex; flex-direction:column; align-items:center;
+    position:relative;
+  }
+  .modalClose {
+    position:fixed;top:24px;right:24px;z-index:10;
+    width:40px;height:40px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-2);
+    transition:color 0.2s;
+  }
+  .modalClose:hover { color:var(--text); }
+  .modalImg {
+    width:100%;max-width:700px;
+    margin-bottom:32px;
+    box-shadow:0 4px 40px rgba(0,0,0,0.08);
+  }
+  .modalImg img { width:100%; }
+  .modalCaption {
+    text-align:center; max-width:560px; width:100%;
+  }
+  .modalNum { font-family:var(--mono);font-size:11px;color:var(--text-4);margin-bottom:8px; }
+  .modalTitle { font-size:24px;font-weight:300;letter-spacing:-0.02em;margin-bottom:6px; }
+  .modalArtist { font-size:14px;font-weight:300;color:var(--text-3);margin-bottom:8px; }
+  .modalArtist a { font-style:italic; }
+  .modalTags { display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:20px; }
+  .modalTag { font-size:11px;padding:3px 10px;border:1px solid var(--border);border-radius:2px;color:var(--text-3);font-weight:300; }
+  .modalPromptBlock {
+    width:100%;text-align:left;
+    margin-bottom:20px;
+  }
+  .modalPromptLabel {
+    font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--text-4);margin-bottom:8px;font-weight:500;
+  }
+  .modalPromptText {
+    font-family:var(--mono);font-size:13px;line-height:1.7;
+    color:var(--text-2);
+    background:var(--bg-subtle);
+    padding:20px 24px;
+    border-radius:4px;
+    white-space:pre-wrap;word-break:break-word;
+    max-height:300px;overflow-y:auto;
+  }
+  .modalCopy {
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 28px;
+    background:var(--text);color:var(--bg);
+    border-radius:3px;font-size:13px;font-weight:400;
+    transition:opacity 0.2s;
+  }
+  .modalCopy:hover { opacity:0.8; }
+  .modalCopy.copied { background:#16A34A; }
+
+  .scrollTop {
+    position:fixed;bottom:24px;right:24px;z-index:50;
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text-2);
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.2s;
+    animation:fadeIn 0.2s;
+  }
+  .scrollTop:hover { border-color:var(--text);color:var(--text); }
+
+  .footer {
+    border-top:1px solid var(--border-2);
+    padding:32px 48px;
+    text-align:center;
+    font-size:12px;color:var(--text-4);
+    font-weight:300;
+  }
+
+  @media(max-width:700px) {
+    .topbar,.hero,.filterArea,.gallery,.footer { padding-left:20px;padding-right:20px; }
+    .catRow { gap:16px; flex-wrap:wrap; }
+    .exhibitFrame img,.noImg { aspect-ratio:3/2; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@19/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@19/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback } = React;
+
+const SAMPLE_DATA = {
+  repository: "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
+  totalCases: 9,
+  categories: [
+    {id:"ui",name:"UI",count:1},{id:"poster",name:"Poster",count:3},
+    {id:"character",name:"Character",count:1},{id:"scene",name:"Scene",count:2},{id:"other",name:"Other",count:2}
+  ],
+  tags: ["3D","中国风","写实","卡通","复古","暗色","极简","科技"],
+  cases: [
+    {id:1,title:"社媒界面截图",image:"",sourceLabel:"@Ailln_AI",sourceUrl:"https://x.com/Ailln_AI",prompt:"画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文：推荐一位很棒的 AI Builder。\n底部添加深色宣传海报。",promptPreview:"画一张 X 的内容截图，深色模式...",category:"ui",tags:["极简","暗色"]},
+    {id:2,title:"足球主题电影海报",image:"",sourceLabel:"社区分享",sourceUrl:"",prompt:"生成一张足球主题电影海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，欧冠之夜般的史诗氛围。",promptPreview:"生成一张足球主题电影海报...",category:"poster",tags:["写实"]},
+    {id:3,title:"老干妈风味直播",image:"",sourceLabel:"小红书号989137706",sourceUrl:"",prompt:"特朗普在抖音直播间卖老干妈，手里举着新品，背景SpaceX科技感，左下角弹幕。",promptPreview:"特朗普在抖音直播间卖老干妈...",category:"other",tags:["科技","复古"]},
+    {id:4,title:"中国风水墨山水",image:"",sourceLabel:"@art_master",sourceUrl:"https://x.com/art_master",prompt:"创作一幅中国风水墨山水画，远山近水，云雾缭绕。仿宋代山水画风格。",promptPreview:"创作一幅中国风水墨山水画...",category:"other",tags:["中国风"]},
+    {id:5,title:"3D卡通角色设计",image:"",sourceLabel:"@designhub",sourceUrl:"https://x.com/designhub",prompt:"设计一个3D卡通风格的角色：穿着宇航服的猫咪宇航员，Q版比例。",promptPreview:"设计一个3D卡通风格的角色...",category:"character",tags:["3D","卡通"]},
+    {id:8,title:"图形置换字体设计",image:"",sourceLabel:"@xiaoxiaodong01",sourceUrl:"https://x.com/xiaoxiaodong01/status/2059204254871736375",prompt:"图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",promptPreview:"图形置换：把某个笔画替换成图形元素...",category:"poster",tags:[]}
+  ]
+};
+
+function App() {
+  const [data, setData] = useState(null);
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeTag, setActiveTag] = useState('all');
+  const [copiedId, setCopiedId] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [showTags, setShowTags] = useState(false);
+  const [scrollTop, setScrollTop] = useState(false);
+
+  useEffect(() => {
+    fetch('./cases.json')
+      .then(r=>r.json())
+      .then(json=>setData(json))
+      .catch(()=>setData(SAMPLE_DATA));
+  }, []);
+
+  useEffect(() => {
+    const fn = () => setScrollTop(window.scrollY > 600);
+    window.addEventListener('scroll', fn, {passive:true});
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!data) return [];
+    let items = data.cases;
+    if (activeCategory !== 'all') items = items.filter(c => c.category === activeCategory);
+    if (activeTag !== 'all') items = items.filter(c => c.tags.includes(activeTag));
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      items = items.filter(c => c.title.toLowerCase().includes(q) || c.prompt.toLowerCase().includes(q) || c.sourceLabel.toLowerCase().includes(q));
+    }
+    return items;
+  }, [data, activeCategory, activeTag, search]);
+
+  const copy = useCallback((id, prompt) => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    });
+  }, []);
+
+  const reset = () => { setSearch(''); setActiveCategory('all'); setActiveTag('all'); };
+
+  if (!data) return <div style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',color:'#ccc'}}>Loading...</div>;
+
+  const activeCats = data.categories.filter(c => c.count > 0);
+
+  return (
+    <div>
+      <header className="topbar">
+        <div className="brand">GALLERY</div>
+        <div className="topMeta">{data.totalCases} works</div>
+      </header>
+
+      <section className="hero">
+        <div className="heroLabel">Current Exhibition</div>
+        <h1>GPT-Image2 Prompts</h1>
+        <p>A contemplative collection of AI-generated art prompts, curated from the community.</p>
+      </section>
+
+      <div className="searchArea">
+        <div className="searchUnderline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} />
+          {search && <button className="clear" onClick={() => setSearch('')}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>}
+        </div>
+      </div>
+
+      <div className="filterArea">
+        <div className="catRow">
+          <button className={`catItem ${activeCategory==='all'?'active':''}`} onClick={() => setActiveCategory('all')}>
+            All <span className="catCount">{data.totalCases}</span>
+          </button>
+          {activeCats.map(cat => (
+            <button key={cat.id} className={`catItem ${activeCategory===cat.id?'active':''}`} onClick={() => setActiveCategory(cat.id)}>
+              {cat.name} <span className="catCount">{cat.count}</span>
+            </button>
+          ))}
+        </div>
+
+        <button className="tagToggleBtn" onClick={() => setShowTags(!showTags)}>
+          {showTags ? '− Hide tags' : '+ Show tags'}
+        </button>
+
+        {showTags && data.tags.length > 0 && (
+          <div className="tagRow">
+            <button className={`tagChip ${activeTag==='all'?'active':''}`} onClick={() => setActiveTag('all')}>All</button>
+            {data.tags.map(t => (
+              <button key={t} className={`tagChip ${activeTag===t?'active':''}`} onClick={() => setActiveTag(t)}>{t}</button>
+            ))}
+          </div>
+        )}
+
+        <div className="statusLine">
+          <b>{filtered.length}</b> of {data.totalCases} works
+          {(search || activeCategory !== 'all' || activeTag !== 'all') && (
+            <button className="resetLink" onClick={reset}>Reset</button>
+          )}
+        </div>
+      </div>
+
+      <div className="gallery">
+        {filtered.map(c => {
+          const catName = data.categories.find(cat => cat.id === c.category)?.name || 'Other';
+          return (
+            <article key={c.id} className="exhibit">
+              <div className="exhibitFrame" onClick={() => setPreview(c)}>
+                {c.image ? (
+                  <img src={`.${c.image}`} alt={c.title} loading="lazy" />
+                ) : (
+                  <div className="noImg">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  </div>
+                )}
+              </div>
+              <div className="exhibitCaption">
+                <div className="exhibitNum">No. {String(c.id).padStart(3,'0')} — {catName}</div>
+                <h3 className="exhibitTitle">{c.title}</h3>
+                <div className="exhibitArtist">
+                  {c.sourceUrl ? <a href={c.sourceUrl} target="_blank">{c.sourceLabel}</a> : c.sourceLabel}
+                </div>
+                {c.tags.length > 0 && (
+                  <div className="exhibitTags">
+                    {c.tags.map(t => <span key={t} className="exhibitTag">{t}</span>)}
+                  </div>
+                )}
+                <div className="exhibitPrompt">{c.promptPreview}</div>
+                <div className="exhibitActions">
+                  <button className={`actionBtn primary ${copiedId===c.id?'copied':''}`} onClick={() => copy(c.id, c.prompt)}>
+                    {copiedId===c.id ? '✓ Copied' : 'Copy Prompt'}
+                  </button>
+                  {c.sourceUrl && (
+                    <a href={c.sourceUrl} target="_blank" className="actionBtn">View Source</a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="empty">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{margin:'0 auto 12px',opacity:0.3,display:'block'}}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>No works found</p>
+          <button onClick={reset}>Reset Filters</button>
+        </div>
+      )}
+
+      {preview && (
+        <div className="modal" onClick={() => setPreview(null)}>
+          <div className="modalInner" onClick={e => e.stopPropagation()}>
+            <button className="modalClose" onClick={() => setPreview(null)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div className="modalImg">
+              {preview.image ? (
+                <img src={`.${preview.image}`} alt={preview.title} />
+              ) : (
+                <div style={{width:'100%',aspectRatio:'4/3',background:'#fafafa',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" strokeWidth="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+              )}
+            </div>
+            <div className="modalCaption">
+              <div className="modalNum">No. {String(preview.id).padStart(3,'0')}</div>
+              <h2 className="modalTitle">{preview.title}</h2>
+              <div className="modalArtist">
+                {preview.sourceUrl ? <a href={preview.sourceUrl} target="_blank">{preview.sourceLabel} →</a> : preview.sourceLabel}
+              </div>
+              <div className="modalTags">
+                <span className="modalTag">{data.categories.find(c => c.id === preview.category)?.name || 'Other'}</span>
+                {preview.tags.map(t => <span key={t} className="modalTag">{t}</span>)}
+              </div>
+              <div className="modalPromptBlock">
+                <div className="modalPromptLabel">Prompt</div>
+                <pre className="modalPromptText">{preview.prompt}</pre>
+              </div>
+              <button className={`modalCopy ${copiedId===preview.id?'copied':''}`} onClick={() => copy(preview.id, preview.prompt)}>
+                {copiedId===preview.id ? '✓ Copied to clipboard' : 'Copy Full Prompt'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {scrollTop && (
+        <button className="scrollTop" onClick={() => window.scrollTo({top:0,behavior:'smooth'})}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
+      )}
+
+      <footer className="footer">
+        GPT-Image2 Gallery — Prompts collected from the community, for learning and inspiration.
+      </footer>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
