@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "id": "ui",
+      "name": "UI与界面",
+      "icon": "Monitor",
+      "keywords": ["ui", "app", "interface", "dashboard", "screenshot", "界面", "截图", "网页", "应用", "产品页"]
+    },
+    {
+      "id": "infographic",
+      "name": "图表与信息图",
+      "icon": "BarChart3",
+      "keywords": ["infographic", "diagram", "chart", "atlas", "信息图", "图解", "图表", "图谱", "数据可视化", "流程图"]
+    },
+    {
+      "id": "poster",
+      "name": "海报与排版",
+      "icon": "Image",
+      "keywords": ["poster", "cover", "typography", "layout", "海报", "封面", "排版", "字体", "宣传"]
+    },
+    {
+      "id": "product",
+      "name": "产品与电商",
+      "icon": "ShoppingBag",
+      "keywords": ["product", "packaging", "ecommerce", "e-commerce", "产品", "电商", "包装", "详情页", "卖点", "商品"]
+    },
+    {
+      "id": "brand",
+      "name": "品牌与Logo",
+      "icon": "Palette",
+      "keywords": ["logo", "brand", "identity", "品牌", "标志", "商标", "vi"]
+    },
+    {
+      "id": "architecture",
+      "name": "建筑与空间",
+      "icon": "Building2",
+      "keywords": ["architecture", "interior", "building", "建筑", "室内", "空间", "装修", "城市"]
+    },
+    {
+      "id": "photo",
+      "name": "摄影与写实",
+      "icon": "Camera",
+      "keywords": ["photo", "portrait", "camera", "realistic", "photography", "摄影", "写真", "写实", "人像", "胶片"]
+    },
+    {
+      "id": "illustration",
+      "name": "插画与艺术",
+      "icon": "Paintbrush",
+      "keywords": ["illustration", "painting", "watercolor", "art", "插画", "绘画", "艺术", "水彩", "油画", "手绘"]
+    },
+    {
+      "id": "character",
+      "name": "角色与人物",
+      "icon": "User",
+      "keywords": ["character", "avatar", "figure", "角色", "人物", "头像", "立绘", "人设"]
+    },
+    {
+      "id": "scene",
+      "name": "场景与叙事",
+      "icon": "Film",
+      "keywords": ["scene", "storyboard", "narrative", "场景", "叙事", "分镜", "故事", "世界观"]
+    },
+    {
+      "id": "other",
+      "name": "其他",
+      "icon": "Sparkles",
+      "keywords": []
+    }
+  ]
+}

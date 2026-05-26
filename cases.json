@@ -1,0 +1,395 @@
+{
+  "repository": "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
+  "totalCases": 13,
+  "categories": [
+    {
+      "id": "ui",
+      "name": "UI与界面",
+      "icon": "Monitor",
+      "keywords": [
+        "ui",
+        "app",
+        "interface",
+        "dashboard",
+        "screenshot",
+        "界面",
+        "截图",
+        "网页",
+        "应用",
+        "产品页"
+      ],
+      "count": 2
+    },
+    {
+      "id": "infographic",
+      "name": "图表与信息图",
+      "icon": "BarChart3",
+      "keywords": [
+        "infographic",
+        "diagram",
+        "chart",
+        "atlas",
+        "信息图",
+        "图解",
+        "图表",
+        "图谱",
+        "数据可视化",
+        "流程图"
+      ],
+      "count": 0
+    },
+    {
+      "id": "poster",
+      "name": "海报与排版",
+      "icon": "Image",
+      "keywords": [
+        "poster",
+        "cover",
+        "typography",
+        "layout",
+        "海报",
+        "封面",
+        "排版",
+        "字体",
+        "宣传"
+      ],
+      "count": 4
+    },
+    {
+      "id": "product",
+      "name": "产品与电商",
+      "icon": "ShoppingBag",
+      "keywords": [
+        "product",
+        "packaging",
+        "ecommerce",
+        "e-commerce",
+        "产品",
+        "电商",
+        "包装",
+        "详情页",
+        "卖点",
+        "商品"
+      ],
+      "count": 0
+    },
+    {
+      "id": "brand",
+      "name": "品牌与Logo",
+      "icon": "Palette",
+      "keywords": [
+        "logo",
+        "brand",
+        "identity",
+        "品牌",
+        "标志",
+        "商标",
+        "vi"
+      ],
+      "count": 0
+    },
+    {
+      "id": "architecture",
+      "name": "建筑与空间",
+      "icon": "Building2",
+      "keywords": [
+        "architecture",
+        "interior",
+        "building",
+        "建筑",
+        "室内",
+        "空间",
+        "装修",
+        "城市"
+      ],
+      "count": 0
+    },
+    {
+      "id": "photo",
+      "name": "摄影与写实",
+      "icon": "Camera",
+      "keywords": [
+        "photo",
+        "portrait",
+        "camera",
+        "realistic",
+        "photography",
+        "摄影",
+        "写真",
+        "写实",
+        "人像",
+        "胶片"
+      ],
+      "count": 0
+    },
+    {
+      "id": "illustration",
+      "name": "插画与艺术",
+      "icon": "Paintbrush",
+      "keywords": [
+        "illustration",
+        "painting",
+        "watercolor",
+        "art",
+        "插画",
+        "绘画",
+        "艺术",
+        "水彩",
+        "油画",
+        "手绘"
+      ],
+      "count": 0
+    },
+    {
+      "id": "character",
+      "name": "角色与人物",
+      "icon": "User",
+      "keywords": [
+        "character",
+        "avatar",
+        "figure",
+        "角色",
+        "人物",
+        "头像",
+        "立绘",
+        "人设"
+      ],
+      "count": 1
+    },
+    {
+      "id": "scene",
+      "name": "场景与叙事",
+      "icon": "Film",
+      "keywords": [
+        "scene",
+        "storyboard",
+        "narrative",
+        "场景",
+        "叙事",
+        "分镜",
+        "故事",
+        "世界观"
+      ],
+      "count": 4
+    },
+    {
+      "id": "other",
+      "name": "其他",
+      "icon": "Sparkles",
+      "keywords": [],
+      "count": 2
+    }
+  ],
+  "tags": [
+    "3D",
+    "中国风",
+    "写实",
+    "创意",
+    "卡通",
+    "商务",
+    "复古",
+    "扁平",
+    "暗色",
+    "极简",
+    "科技"
+  ],
+  "cases": [
+    {
+      "id": 1,
+      "title": "社媒界面截图",
+      "image": "/images/case1.jpg",
+      "imageAlt": "X/Twitter 界面截图",
+      "sourceLabel": "@Ailln_AI",
+      "sourceUrl": "https://x.com/Ailln_AI",
+      "prompt": "画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文的中文内容：\n今天想推荐一位很棒的 AI Builder：Ailln AI。\n他持续在小红书分享 AI 工具、Agent 工作流、自动化实践和真实项目经验。\n在小红书搜索：Ailln AI\n底部添加一张深色官方宣传风格海报，简洁黑客质感。\n海报大字：「Ailln AI」\n副标题：「A brilliant AI Builder worth following」\n图片比例为3:4，不包含软件其他部分。",
+      "promptPreview": "画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文的中文内容：\n今天想推荐一位很棒的 AI Builder：Ailln AI。\n他持续在小红书分享 AI 工具、Agent 工作流、自动化实践和真实项目经验。\n在小红书...",
+      "category": "ui",
+      "tags": [
+        "极简",
+        "写实",
+        "暗色"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-1"
+    },
+    {
+      "id": 2,
+      "title": "足球主题电影海报",
+      "image": "/images/case2.jpg",
+      "imageAlt": "足球主题电影海报",
+      "sourceLabel": "社区分享",
+      "sourceUrl": "",
+      "prompt": "生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，双手高举并披着波黑国旗，神情热血、坚定、自信，现场灯光璀璨，球场看台座无虚席，背景有蓝黑色烟雾、聚光灯、飘扬的旗帜和飞舞的纸屑，营造欧冠之夜般的史诗氛围。人物为画面核心，半身到全身构图，突出脸部细节、肌肉张力与球衣质感。整体风格写实、震撼、富有戏剧性，海报级构图，电影感光影，高对比度，超清细节，8K，专业体育摄影，极具视觉冲击力。",
+      "promptPreview": "生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，双手高举并披着波黑国旗，神情热血、坚定、自信，现场灯光璀璨，球场看台座无虚席，背景有蓝黑色烟雾、聚光灯、飘扬的旗帜和飞舞的纸屑，营造欧冠之夜般的...",
+      "category": "poster",
+      "tags": [
+        "写实"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-2"
+    },
+    {
+      "id": 3,
+      "title": "老干妈风味直播",
+      "image": "/images/case3.jpg",
+      "imageAlt": "特朗普直播间卖老干妈",
+      "sourceLabel": "小红书号989137706",
+      "sourceUrl": "",
+      "prompt": "特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感，左下角弹幕飘着「特斯拉车主：求上链接」。",
+      "promptPreview": "特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感，左下角弹幕飘着「特斯拉车主：求上链接」。",
+      "category": "other",
+      "tags": [
+        "科技",
+        "复古"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-3"
+    },
+    {
+      "id": 4,
+      "title": "中国风水墨山水",
+      "image": "/images/case4.jpg",
+      "imageAlt": "水墨山水画",
+      "sourceLabel": "@art_master",
+      "sourceUrl": "https://x.com/art_master",
+      "prompt": "创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞。左侧山峦叠嶂，松林掩映中隐约可见一座古寺。右侧水面开阔，一叶扁舟泊于柳下。整体色调淡雅，留白大气，仿宋代山水画风格。8K超清细节，宣纸质感。",
+      "promptPreview": "创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞。左侧山峦叠嶂，松林掩映中隐约可见一座古寺。右侧水面开阔，一叶扁舟泊于柳下。整体色调淡雅，留白大气，仿宋代山水画风格。8K超清细节，宣纸质感。",
+      "category": "other",
+      "tags": [
+        "中国风"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-4"
+    },
+    {
+      "id": 5,
+      "title": "3D卡通角色设计",
+      "image": "/images/case5.jpg",
+      "imageAlt": "3D卡通角色",
+      "sourceLabel": "@designhub",
+      "sourceUrl": "https://x.com/designhub",
+      "prompt": "设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌，一只爪子拿着小旗帜。Q版比例（大头小身），光滑的塑料质感，柔和的studio灯光，纯色渐变背景。角色表情可爱、充满活力，适合作为IP形象使用。C4D渲染风格，8K细节。",
+      "promptPreview": "设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌，一只爪子拿着小旗帜。Q版比例（大头小身），光滑的塑料质感，柔和的studio灯光，纯色渐变背景。角色表情可爱、充满活力，适合作为IP形象使用。C4D渲染风格，8K细节。",
+      "category": "character",
+      "tags": [
+        "3D",
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-5"
+    },
+    {
+      "id": 6,
+      "title": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "image": "/images/case6.jpg",
+      "imageAlt": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058773446167773521",
+      "prompt": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠：地铁站里的秘密路线\n4、小海豹：下潜到深海的一小时\n\n每张图都有大场景、导览路线、知识站点和原创IP\n把复杂系统变成孩子能看懂、成年人也愿意停留的科普绘本页！\n\n完整提示词在评论区👇",
+      "promptPreview": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠...",
+      "category": "scene",
+      "tags": [
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-6"
+    },
+    {
+      "id": 7,
+      "title": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "image": "/images/case7.jpg",
+      "imageAlt": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058773446167773521",
+      "prompt": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠：地铁站里的秘密路线\n4、小海豹：下潜到深海的一小时\n\n每张图都有大场景、导览路线、知识站点和原创IP\n把复杂系统变成孩子能看懂、成年人也愿意停留的科普绘本页！\n\n完整提示词在评论区👇",
+      "promptPreview": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠...",
+      "category": "scene",
+      "tags": [
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-7"
+    },
+    {
+      "id": 8,
+      "title": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "image": "/images/case8.jpg",
+      "imageAlt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "sourceLabel": "@xiaoxiaodong01",
+      "sourceUrl": "https://x.com/xiaoxiaodong01/status/2059204254871736375",
+      "prompt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：让留白、空隙、缺口也参与表达意义。\n汉字意象化设计：不是装饰字体，而是把汉字变成一种可观看的思想。",
+      "promptPreview": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：...",
+      "category": "poster",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-8"
+    },
+    {
+      "id": 9,
+      "title": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "image": "/images/case9.jpg",
+      "imageAlt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "sourceLabel": "@xiaoxiaodong01",
+      "sourceUrl": "https://x.com/xiaoxiaodong01/status/2059204254871736375",
+      "prompt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：让留白、空隙、缺口也参与表达意义。\n汉字意象化设计：不是装饰字体，而是把汉字变成一种可观看的思想。",
+      "promptPreview": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：...",
+      "category": "poster",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-9"
+    },
+    {
+      "id": 10,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case10.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！\n\n4个不同品类案例：\n青柚信号站、丸作研究社、云朵冰务局、慢慢邮局\n每张图都包含：摊位实景渲染+物料展开+尺寸配色+IP形象+使用场景\n\n这套视觉，让你的小摊成为集市最靓的摊！\n很适合文创集市、美食市集、校园活动、音乐节摊位、商场快闪参考！\n\n通用提示词放评论区👇",
+      "promptPreview": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！\n\n4个不同品类案例：\n青柚信号站、丸作研究社、云朵冰务局、慢慢邮局\n每张图都包含：摊位实景渲染+物料展开+尺寸配色+IP形象+使用场景\n\n这套视觉，让你的小摊成...",
+      "category": "scene",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-10"
+    },
+    {
+      "id": 11,
+      "title": "案例 11",
+      "image": "/images/case11.jpg",
+      "imageAlt": "案例 11",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "请根据以下用户输入，生成一张横版 4:3 的《创意集市摊位设计提案板 / Creative Market Stall Proposal Board》。\n\n这不是单纯的摊位效果图，而是一张完整的品牌出摊视觉提案图，需要同时呈现：摊位实景渲染、物料展开、尺寸示意、配色材质、品牌元素、IP形象、使用场景和核心亮点。\n\n【用户输入】\n品牌名：【填写品牌名】\n摊位主题：【填写主题，例如鲜果气泡饮 / 章鱼小丸子 / 甜品冰品 / 文创手作】\n主营产品：【填写具体产品】\n目标人群：【年轻人 / 学生 / 女性消费者 / 亲子家庭 / 文创市集人群等】\n整体风格：【清爽活力 / 街头热食 / 梦幻甜美 / 文艺手作 / 复古可爱 / 高饱和潮流等】\n主色调：【填写主色】\n辅助色：【填写辅助色】\nIP形象：【填写IP设定，例如青柚精灵 / 小丸子研究员 / 云朵精灵 / 邮差小狗】\n核心口号：【填写一句短口号】\n使用场景：【文创市集 / 美食市集 / 校园活动 / 音乐节 / 商场快闪 / 品牌路演】\n\n【整体画面要求】\n画面比例为横版 4:3。\n整体是一张专业的摊位设计提案板，采用高信息量但清晰有序的版式。\n画面需要有明显的设计感、提案感和商业落地感，不要像普通广告海报，也不要像单纯效果图。\n\n整体视觉应融合：\n1. 写实摊位渲染效果图\n2. 平面物料展开图\n3. 简化尺寸结构图\n4. 品牌视觉系统展示\n5. 手绘批注、箭头、圈注、marker 标记\n6. 淡淡的纸张纹理或设计稿纹理背景\n\n整体风格参考当代年轻人喜欢的文创集市、美食集市、快闪摊位、品牌市集摊位。\n需要新潮、好拍照、适合打卡传播，同时看起来真实可搭建、可落地执行。\n\n【版式结构】\n整张图应包含以下板块：\n\n1. 顶部标题区\n- 大标题：【品牌名】· 创意集市摊位设计提案\n- 副标题：【主题品类】视觉系统 / Pop-up Stall Proposal\n- 标题字体要有设计感，不能太普通\n- 可以加入少量手绘符号、品牌图形、IP小头像或短口号\n\n2. 主视觉效果区\n- 左侧或画面核心区域放一张最大的摊位写实渲染图\n- 场景为真实文创集市 / 户外市集 / 美食集市 / 商场快闪 / 校园活动等\n- 需要有背景人流、帐篷、树木、灯串、摊位氛围，但人物不要喧宾夺主\n- 摊位必须是“文创集市标准摊位”，不是三轮车、不是餐车\n- 摊位结构包括：顶部异形招牌、前台围板、侧边围板、菜单立牌、挂牌、产品陈列、IP立牌、打卡装置、灯光或装饰物\n- 主视觉要写实、清晰、有真实搭建感\n\n3. 物料展开区 / Graphic & Materials\n展示这套摊位涉及的主要物料设计，采用平铺设计稿方式呈现：\n- 顶部招牌\n- 前台围板\n- 侧边围板\n- 菜单立牌 A3\n- 挂牌 / 双面吊牌\n- 贴纸 / 小标识\n- 吉祥物立牌\n- 价格标签\n- 手持打卡牌\n每个物料旁边可以有简短编号和中文标签，排版要整洁，有设计提案感。\n\n4. 尺寸示意区 / Dimensions\n展示摊位的简化正视图和侧视图。\n加入可信的尺寸标注，例如：\n- 总宽度 240cm\n- 总高度 260cm\n- 柜体宽度 220cm\n- 操作台高度 90cm\n- 顶部招牌高度 70cm\n- 侧面深度 60-120cm\n尺寸不需要像 CAD 一样精确，但要看起来专业、合理、可落地。\n可以加入人物比例剪影作为参照。\n\n5. 配色 / 材质区 / Color & Material\n展示 4-5 个色块，并标注色彩名称和近似 HEX 色值。\n展示推荐材质，例如：\n- KT板\n- 雪弗板\n- 泡沫板异形切割\n- 亚克力灯箱\n- PVC贴纸\n- 防水喷绘布\n- 金属框架\n- 木纹板 / 布旗 / 灯串等\n材质展示要像设计提案板，不要过于杂乱。\n\n6. 品牌元素区 / Brand Elements\n展示完整品牌视觉系统：\n- Logo组合\n- IP吉祥物\n- 吉祥物表情包\n- 辅助图形\n- 产品图标\n- 底纹 / 延展图案\n- 小贴纸元素\n这一块要体现品牌可延展性，而不是只做一个摊位外观。\n\n7. 摊位类型区 / Stall Type\n明确写出：\nA. 文创集市标准摊位（本方案主推）\n说明适用场景：\n文创市集 / 美食市集 / 校园活动 / 音乐节 / 商场快闪 / 品牌路演\n说明特点：\n模块化搭建、运输方便、视觉醒目、适合拍照打卡、物料可复用。\n\n注意：本图只展示“文创集市标准摊位”，不要展示三轮车流动摊位。\n\n8. 使用场景 / 设计关键词 / 核心亮点\n底部可以加入小型信息栏：\n- 使用场景：文创市集、校园活动、音乐节、商场快闪、品牌路演\n- 设计关键词：年轻、打卡、社交、模块化、高识别、可延展\n- 核心亮点：高辨识度、易搭建、强互动、高传播、可复用、适合商业落地\n\n【视觉风格要求】\n整体画面要明亮、有冲击力，避免颜色太淡、太灰、太暗。\n提高对比度，主色要更饱和，标题和重点信息要清晰有力。\n背景可以使用淡淡的纸张纹理、印刷纹理、设计稿纹理或浅色图案，但不能抢主体。\n版式要专业、整洁、有层次，像设计师给客户做的完整摊位提案板。\n可以加入少量手绘箭头、圈注、便利贴感批注、marker笔记，增强提案氛围。\n\n中文文字要简洁，不要塞太多长句。\n主标题、板块标题、口号、标签尽量清晰准确。\n所有品牌名、口号、IP和物料文字都必须原创，不要复制任何参考图里的品牌、标语或具体文字。\n\n【最终效果】\n生成一张完整、专业、年轻化、高完成度的创意集市摊位设计提案板。\n它应该看起来像一个小品牌从 0 到 1 的出摊视觉系统方案：\n既有真实摊位落地效果，又有物料设计、尺寸说明、品牌系统和商业应用场景。",
+      "promptPreview": "请根据以下用户输入，生成一张横版 4:3 的《创意集市摊位设计提案板 / Creative Market Stall Proposal Board》。\n\n这不是单纯的摊位效果图，而是一张完整的品牌出摊视觉提案图，需要同时呈现：摊位实景渲染、...",
+      "category": "ui",
+      "tags": [
+        "极简",
+        "扁平",
+        "复古",
+        "写实",
+        "卡通",
+        "商务",
+        "创意"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-11"
+    },
+    {
+      "id": 12,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case12.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "测试发布：生成一张集市摊位设计图，包含摊位实景渲染、物料展开图、尺寸配色标注、IP形象设计、使用场景展示。风格：温馨文创风，暖色调灯光，木质结构，适合文创集市和美食节。",
+      "promptPreview": "测试发布：生成一张集市摊位设计图，包含摊位实景渲染、物料展开图、尺寸配色标注、IP形象设计、使用场景展示。风格：温馨文创风，暖色调灯光，木质结构，适合文创集市和美食节。",
+      "category": "scene",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-12"
+    },
+    {
+      "id": 13,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case13.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "即时发布测试：设计一个夏日海滩音乐节的品牌视觉系统，包括主视觉海报、舞台设计、周边商品、指示牌。风格：活力、年轻、色彩鲜艳。",
+      "promptPreview": "即时发布测试：设计一个夏日海滩音乐节的品牌视觉系统，包括主视觉海报、舞台设计、周边商品、指示牌。风格：活力、年轻、色彩鲜艳。",
+      "category": "poster",
+      "tags": [
+        "商务"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-13"
+    }
+  ]
+}
