@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
-  "totalCases": 14,
+  "totalCases": 15,
   "categories": [
     {
       "id": "ui",
@@ -86,7 +86,7 @@
         "商标",
         "vi"
       ],
-      "count": 0
+      "count": 1
     },
     {
       "id": "architecture",
@@ -406,6 +406,22 @@
         "商务"
       ],
       "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-14"
+    },
+    {
+      "id": 15,
+      "title": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "image": "/images/case15.jpg",
+      "imageAlt": "🔥我用 ChatGPT-Image2 生成「集市摊位设计提案」，可以出摊了！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058948398225482102",
+      "prompt": "调试测试：设计一个复古唱片店品牌视觉。",
+      "promptPreview": "调试测试：设计一个复古唱片店品牌视觉。",
+      "category": "brand",
+      "tags": [
+        "复古",
+        "商务"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-15"
     }
   ]
 }
