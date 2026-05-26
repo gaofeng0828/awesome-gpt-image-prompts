@@ -101,27 +101,34 @@ else
   IMAGE_LINE="![$TITLE](../data/images/case${NEXT_ID}.jpg)"
 fi
 
-# Write markdown entry to a temp file (safe for multi-line / special chars)
+# Write prompt to temp file first (avoids heredoc expansion issues with backticks/$/etc)
+PROMPT_FILE=$(mktemp)
+printf '%s' "$USER_PROMPT" > "$PROMPT_FILE"
+
+# Build markdown entry by concatenation (safe for special chars in prompt)
 ENTRY_FILE=$(mktemp)
-cat > "$ENTRY_FILE" <<ENTRY_EOF
+{
+  echo ""
+  echo "<a name=\"case-$NEXT_ID\"></a>"
+  echo ""
+  echo "### 例 $NEXT_ID：$TITLE"
+  echo ""
+  echo "$IMAGE_LINE"
+  echo ""
+  echo "**来源：** [$SOURCE_LABEL]($TWEET_URL_ACTUAL)"
+  echo ""
+  echo "**提示词：**"
+  echo ""
+  echo '```text'
+  cat "$PROMPT_FILE"
+  echo ""
+  echo '```'
+  echo ""
+  echo "***"
+  echo ""
+} > "$ENTRY_FILE"
 
-<a name="case-$NEXT_ID"></a>
-
-### 例 $NEXT_ID：$TITLE
-
-$IMAGE_LINE
-
-**来源：** [$SOURCE_LABEL]($TWEET_URL_ACTUAL)
-
-**提示词：**
-
-\`\`\`text
-$USER_PROMPT
-\`\`\`
-
-***
-
-ENTRY_EOF
+rm -f "$PROMPT_FILE"
 
 # Insert into gallery.md before the marker, or append to end
 if grep -q "<!-- 在上方添加新案例" docs/gallery.md; then
