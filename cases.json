@@ -1,0 +1,330 @@
+{
+  "repository": "https://github.com/gaofeng0828/awesome-gpt-image-prompts",
+  "totalCases": 9,
+  "categories": [
+    {
+      "id": "ui",
+      "name": "UI与界面",
+      "icon": "Monitor",
+      "keywords": [
+        "ui",
+        "app",
+        "interface",
+        "dashboard",
+        "screenshot",
+        "界面",
+        "截图",
+        "网页",
+        "应用",
+        "产品页"
+      ],
+      "count": 1
+    },
+    {
+      "id": "infographic",
+      "name": "图表与信息图",
+      "icon": "BarChart3",
+      "keywords": [
+        "infographic",
+        "diagram",
+        "chart",
+        "atlas",
+        "信息图",
+        "图解",
+        "图表",
+        "图谱",
+        "数据可视化",
+        "流程图"
+      ],
+      "count": 0
+    },
+    {
+      "id": "poster",
+      "name": "海报与排版",
+      "icon": "Image",
+      "keywords": [
+        "poster",
+        "cover",
+        "typography",
+        "layout",
+        "海报",
+        "封面",
+        "排版",
+        "字体",
+        "宣传"
+      ],
+      "count": 3
+    },
+    {
+      "id": "product",
+      "name": "产品与电商",
+      "icon": "ShoppingBag",
+      "keywords": [
+        "product",
+        "packaging",
+        "ecommerce",
+        "e-commerce",
+        "产品",
+        "电商",
+        "包装",
+        "详情页",
+        "卖点",
+        "商品"
+      ],
+      "count": 0
+    },
+    {
+      "id": "brand",
+      "name": "品牌与Logo",
+      "icon": "Palette",
+      "keywords": [
+        "logo",
+        "brand",
+        "identity",
+        "品牌",
+        "标志",
+        "商标",
+        "vi"
+      ],
+      "count": 0
+    },
+    {
+      "id": "architecture",
+      "name": "建筑与空间",
+      "icon": "Building2",
+      "keywords": [
+        "architecture",
+        "interior",
+        "building",
+        "建筑",
+        "室内",
+        "空间",
+        "装修",
+        "城市"
+      ],
+      "count": 0
+    },
+    {
+      "id": "photo",
+      "name": "摄影与写实",
+      "icon": "Camera",
+      "keywords": [
+        "photo",
+        "portrait",
+        "camera",
+        "realistic",
+        "photography",
+        "摄影",
+        "写真",
+        "写实",
+        "人像",
+        "胶片"
+      ],
+      "count": 0
+    },
+    {
+      "id": "illustration",
+      "name": "插画与艺术",
+      "icon": "Paintbrush",
+      "keywords": [
+        "illustration",
+        "painting",
+        "watercolor",
+        "art",
+        "插画",
+        "绘画",
+        "艺术",
+        "水彩",
+        "油画",
+        "手绘"
+      ],
+      "count": 0
+    },
+    {
+      "id": "character",
+      "name": "角色与人物",
+      "icon": "User",
+      "keywords": [
+        "character",
+        "avatar",
+        "figure",
+        "角色",
+        "人物",
+        "头像",
+        "立绘",
+        "人设"
+      ],
+      "count": 1
+    },
+    {
+      "id": "scene",
+      "name": "场景与叙事",
+      "icon": "Film",
+      "keywords": [
+        "scene",
+        "storyboard",
+        "narrative",
+        "场景",
+        "叙事",
+        "分镜",
+        "故事",
+        "世界观"
+      ],
+      "count": 2
+    },
+    {
+      "id": "other",
+      "name": "其他",
+      "icon": "Sparkles",
+      "keywords": [],
+      "count": 2
+    }
+  ],
+  "tags": [
+    "3D",
+    "中国风",
+    "写实",
+    "卡通",
+    "复古",
+    "暗色",
+    "极简",
+    "科技"
+  ],
+  "cases": [
+    {
+      "id": 1,
+      "title": "社媒界面截图",
+      "image": "/images/case1.jpg",
+      "imageAlt": "X/Twitter 界面截图",
+      "sourceLabel": "@Ailln_AI",
+      "sourceUrl": "https://x.com/Ailln_AI",
+      "prompt": "画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文的中文内容：\n今天想推荐一位很棒的 AI Builder：Ailln AI。\n他持续在小红书分享 AI 工具、Agent 工作流、自动化实践和真实项目经验。\n在小红书搜索：Ailln AI\n底部添加一张深色官方宣传风格海报，简洁黑客质感。\n海报大字：「Ailln AI」\n副标题：「A brilliant AI Builder worth following」\n图片比例为3:4，不包含软件其他部分。",
+      "promptPreview": "画一张 X 的内容截图，深色模式，@OpenAI 蓝勾认证账号发推。\n正文的中文内容：\n今天想推荐一位很棒的 AI Builder：Ailln AI。\n他持续在小红书分享 AI 工具、Agent 工作流、自动化实践和真实项目经验。\n在小红书...",
+      "category": "ui",
+      "tags": [
+        "极简",
+        "写实",
+        "暗色"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-1"
+    },
+    {
+      "id": 2,
+      "title": "足球主题电影海报",
+      "image": "/images/case2.jpg",
+      "imageAlt": "足球主题电影海报",
+      "sourceLabel": "社区分享",
+      "sourceUrl": "",
+      "prompt": "生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，双手高举并披着波黑国旗，神情热血、坚定、自信，现场灯光璀璨，球场看台座无虚席，背景有蓝黑色烟雾、聚光灯、飘扬的旗帜和飞舞的纸屑，营造欧冠之夜般的史诗氛围。人物为画面核心，半身到全身构图，突出脸部细节、肌肉张力与球衣质感。整体风格写实、震撼、富有戏剧性，海报级构图，电影感光影，高对比度，超清细节，8K，专业体育摄影，极具视觉冲击力。",
+      "promptPreview": "生成一张「足球主题电影海报」风格的高清写真海报：国际米兰后卫巴斯托尼站在圣西罗球场中央激情庆祝，双手高举并披着波黑国旗，神情热血、坚定、自信，现场灯光璀璨，球场看台座无虚席，背景有蓝黑色烟雾、聚光灯、飘扬的旗帜和飞舞的纸屑，营造欧冠之夜般的...",
+      "category": "poster",
+      "tags": [
+        "写实"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-2"
+    },
+    {
+      "id": 3,
+      "title": "老干妈风味直播",
+      "image": "/images/case3.jpg",
+      "imageAlt": "特朗普直播间卖老干妈",
+      "sourceLabel": "小红书号989137706",
+      "sourceUrl": "",
+      "prompt": "特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感，左下角弹幕飘着「特斯拉车主：求上链接」。",
+      "promptPreview": "特朗普在抖音直播间卖老干妈，手里举着「老干妈风味」新品，背景还是 SpaceX 那种科技感，左下角弹幕飘着「特斯拉车主：求上链接」。",
+      "category": "other",
+      "tags": [
+        "科技",
+        "复古"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-3"
+    },
+    {
+      "id": 4,
+      "title": "中国风水墨山水",
+      "image": "/images/case4.jpg",
+      "imageAlt": "水墨山水画",
+      "sourceLabel": "@art_master",
+      "sourceUrl": "https://x.com/art_master",
+      "prompt": "创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞。左侧山峦叠嶂，松林掩映中隐约可见一座古寺。右侧水面开阔，一叶扁舟泊于柳下。整体色调淡雅，留白大气，仿宋代山水画风格。8K超清细节，宣纸质感。",
+      "promptPreview": "创作一幅中国风水墨山水画，远山近水，云雾缭绕。画面中央一座古桥连接两岸，桥上有行人撑伞。左侧山峦叠嶂，松林掩映中隐约可见一座古寺。右侧水面开阔，一叶扁舟泊于柳下。整体色调淡雅，留白大气，仿宋代山水画风格。8K超清细节，宣纸质感。",
+      "category": "other",
+      "tags": [
+        "中国风"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-4"
+    },
+    {
+      "id": 5,
+      "title": "3D卡通角色设计",
+      "image": "/images/case5.jpg",
+      "imageAlt": "3D卡通角色",
+      "sourceLabel": "@designhub",
+      "sourceUrl": "https://x.com/designhub",
+      "prompt": "设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌，一只爪子拿着小旗帜。Q版比例（大头小身），光滑的塑料质感，柔和的studio灯光，纯色渐变背景。角色表情可爱、充满活力，适合作为IP形象使用。C4D渲染风格，8K细节。",
+      "promptPreview": "设计一个3D卡通风格的角色：一只穿着宇航服的猫咪宇航员，头盔内表情呆萌，一只爪子拿着小旗帜。Q版比例（大头小身），光滑的塑料质感，柔和的studio灯光，纯色渐变背景。角色表情可爱、充满活力，适合作为IP形象使用。C4D渲染风格，8K细节。",
+      "category": "character",
+      "tags": [
+        "3D",
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-5"
+    },
+    {
+      "id": 6,
+      "title": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "image": "/images/case6.jpg",
+      "imageAlt": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058773446167773521",
+      "prompt": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠：地铁站里的秘密路线\n4、小海豹：下潜到深海的一小时\n\n每张图都有大场景、导览路线、知识站点和原创IP\n把复杂系统变成孩子能看懂、成年人也愿意停留的科普绘本页！\n\n完整提示词在评论区👇",
+      "promptPreview": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠...",
+      "category": "scene",
+      "tags": [
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-6"
+    },
+    {
+      "id": 7,
+      "title": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "image": "/images/case7.jpg",
+      "imageAlt": "🤩这才是孩子爱看的 AI 科普绘本！",
+      "sourceLabel": "@MrLarus",
+      "sourceUrl": "https://x.com/MrLarus/status/2058773446167773521",
+      "prompt": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠：地铁站里的秘密路线\n4、小海豹：下潜到深海的一小时\n\n每张图都有大场景、导览路线、知识站点和原创IP\n把复杂系统变成孩子能看懂、成年人也愿意停留的科普绘本页！\n\n完整提示词在评论区👇",
+      "promptPreview": "🤩这才是孩子爱看的 AI 科普绘本！\n用ChatGPT-Image2生成《导览式科普绘本》，超级适合启蒙！🧙‍♀️\n\n我生成了4个案例，让可爱小导览员带着孩子边看边懂：\n1、小鼹鼠：发射场的一天\n2、小海獭：一个集装箱的旅行\n3、小仓鼠...",
+      "category": "scene",
+      "tags": [
+        "卡通"
+      ],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-7"
+    },
+    {
+      "id": 8,
+      "title": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "image": "/images/case8.jpg",
+      "imageAlt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "sourceLabel": "@xiaoxiaodong01",
+      "sourceUrl": "https://x.com/xiaoxiaodong01/status/2059204254871736375",
+      "prompt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：让留白、空隙、缺口也参与表达意义。\n汉字意象化设计：不是装饰字体，而是把汉字变成一种可观看的思想。",
+      "promptPreview": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：...",
+      "category": "poster",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-8"
+    },
+    {
+      "id": 9,
+      "title": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "image": "/images/case9.jpg",
+      "imageAlt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。",
+      "sourceLabel": "@xiaoxiaodong01",
+      "sourceUrl": "https://x.com/xiaoxiaodong01/status/2059204254871736375",
+      "prompt": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：让留白、空隙、缺口也参与表达意义。\n汉字意象化设计：不是装饰字体，而是把汉字变成一种可观看的思想。",
+      "promptPreview": "图形置换：把某个笔画替换成图形元素，但仍保持字形可识别。\n共生图形：一个形同时是笔画，也是图像，比如既是“竖”，也是箭头、路、牵引线。\n视觉隐喻：用图形关系表达抽象意义。\n格式塔原则：让局部变化再多，整体仍然统一、完整、可识别。\n负形空间：...",
+      "category": "poster",
+      "tags": [],
+      "githubUrl": "https://github.com/gaofeng0828/awesome-gpt-image-prompts/blob/main/docs/gallery.md#case-9"
+    }
+  ]
+}
